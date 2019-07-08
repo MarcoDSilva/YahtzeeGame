@@ -96,64 +96,51 @@ namespace Yahtzee
         //trios, four of a kind, sequences, yahtzee, chances
         public void lowerScoreChecker()
         {
-            int dice1 = Convert.ToInt32(lbl_displayDice1.Text);
-            int dice2 = Convert.ToInt32(lbl_displayDice2.Text);
-            int dice3 = Convert.ToInt32(lbl_displayDice3.Text);
-            int dice4 = Convert.ToInt32(lbl_displayDice4.Text);
-            int dice5 = Convert.ToInt32(lbl_displayDice5.Text);
+            int dice1 = Convert.ToInt32(lbl_aces.Text);
+            int dice2 = Convert.ToInt32(lbl_twos.Text);
+            int dice3 = Convert.ToInt32(lbl_threes.Text);
+            int dice4 = Convert.ToInt32(lbl_fours.Text);
+            int dice5 = Convert.ToInt32(lbl_fives.Text);
+            int dice6 = Convert.ToInt32(lbl_sixes.Text);
 
-            //yahtzee checker
-            if(dice1 == dice2 && dice2 == dice3 && dice3 == dice4 && dice4 == dice5)
+            int dice1_val = Convert.ToInt32(lbl_displayDice1.Text);
+            int dice2_val = Convert.ToInt32(lbl_displayDice2.Text);
+            int dice3_val = Convert.ToInt32(lbl_displayDice3.Text);
+            int dice4_val = Convert.ToInt32(lbl_displayDice4.Text);
+            int dice5_val = Convert.ToInt32(lbl_displayDice5.Text);
+
+            //three of a kind
+            if (dice1 >= 3 || dice2 >= 3 || dice3 >= 3 || dice4 >= 3 || dice5 >= 3 || dice6 >= 3)
+            {
+                lbl_score3Kind.Text = Convert.ToString(dice1_val + dice2_val + dice3_val + dice4_val + dice5_val);
+            }
+
+            //four of a kind
+            if (dice1 >= 4 || dice2 >= 4 || dice3 >= 4 || dice4 >= 4 || dice5 >= 4 || dice6 >= 4)
+            {
+                lbl_4KindScore.Text = Convert.ToString(dice1_val + dice2_val + dice3_val + dice4_val + dice5_val);
+            }
+
+            //yahtzee
+            if (dice1 >= 5 || dice2 >= 5 || dice3 >= 5 || dice4 >= 5 || dice5 >= 5 || dice6 >= 5)
             {
                 lbl_scoreYat.Text = Convert.ToString(50);
             }
 
             //large straight
-            if((dice1 == 1 && dice2 == 2 && dice3 == 3 && dice4 == 4 && dice5 == 5) || 
+            if ((dice1 == 1 && dice2 == 2 && dice3 == 3 && dice4 == 4 && dice5 == 5) ||
                     dice1 == 2 && dice2 == 3 && dice3 == 4 && dice4 == 5 && dice5 == 6)
             {
                 lbl_scoreHStraight.Text = Convert.ToString(40);
             }
 
             //lower straights
-            if((dice1 == 1 && dice2 == 2 && dice3 == 3 && dice4 == 4) || (dice1 == 2 && dice2 == 3 && dice3 == 4 && dice4 == 5) ||
+            if ((dice1 == 1 && dice2 == 2 && dice3 == 3 && dice4 == 4) || (dice1 == 2 && dice2 == 3 && dice3 == 4 && dice4 == 5) ||
                     (dice1 == 3 && dice2 == 4 && dice3 == 5 && dice4 == 6) || (dice2 == 1 && dice3 == 2 && dice4 == 3 && dice5 == 4) ||
                        (dice2 == 2 && dice3 == 3 && dice4 == 4 && dice5 == 5) || (dice2 == 3 && dice3 == 4 && dice4 == 5 && dice5 == 6))
             {
                 lbl_scoreLStraight.Text = Convert.ToString(30);
             }
-
-
-            //four of a kind
-            int four_kind_counter = 0;
-            if(dice1 == dice2 || dice1 == dice3 || dice1 == dice4 || dice1 == dice5)
-            {
-                four_kind_counter++;
-
-                if(dice2 == dice3 || dice2 == dice4 || dice2 == dice5)
-                {
-                    four_kind_counter++;
-
-                    if(dice3 == dice4 || dice3 == dice5)
-                    {
-                        four_kind_counter++;
-                    }
-                        if(dice4 == dice5)
-                        {
-                            four_kind_counter++;
-                        }
-                }
-
-                if(four_kind_counter == 4)
-                {
-                    lbl_4KindScore.Text = Convert.ToString(dice1 + dice2 + dice3 + dice4 + dice5);
-                    
-                }
-
-            }
-
-            //four of a kind checker
-            
         }
     }
 }

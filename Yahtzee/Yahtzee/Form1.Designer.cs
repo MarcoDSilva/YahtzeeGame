@@ -63,9 +63,7 @@
             this.scoreBox = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dicePlay_ctrl = new System.Windows.Forms.TableLayoutPanel();
-            this.lbl_d1Txt = new System.Windows.Forms.Label();
             this.lbl_displayDice5 = new System.Windows.Forms.Label();
-            this.lbl_displayDice1 = new System.Windows.Forms.Label();
             this.lbl_d5Txt = new System.Windows.Forms.Label();
             this.lbl_displayDice4 = new System.Windows.Forms.Label();
             this.lbl_d2Txt = new System.Windows.Forms.Label();
@@ -78,7 +76,10 @@
             this.chk_holdD3 = new System.Windows.Forms.CheckBox();
             this.chk_holdD4 = new System.Windows.Forms.CheckBox();
             this.chk_holdD5 = new System.Windows.Forms.CheckBox();
+            this.lbl_d1Txt = new System.Windows.Forms.Label();
+            this.lbl_displayDice1 = new System.Windows.Forms.Label();
             this.lbl_rollsLeft = new System.Windows.Forms.Label();
+            this.lbl_finalScore = new System.Windows.Forms.Label();
             this.layoutPanel_dices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d2)).BeginInit();
@@ -108,7 +109,6 @@
             this.layoutPanel_dices.ColumnCount = 2;
             this.layoutPanel_dices.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
             this.layoutPanel_dices.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.layoutPanel_dices.Controls.Add(this.lbl_totalScore, 0, 14);
             this.layoutPanel_dices.Controls.Add(this.lbl_sixes, 1, 5);
             this.layoutPanel_dices.Controls.Add(this.lbl_fives, 1, 4);
             this.layoutPanel_dices.Controls.Add(this.lbl_fours, 1, 3);
@@ -137,6 +137,8 @@
             this.layoutPanel_dices.Controls.Add(this.lbl_chance, 0, 12);
             this.layoutPanel_dices.Controls.Add(this.lbl_scoreYat, 1, 13);
             this.layoutPanel_dices.Controls.Add(this.lbl_yaht, 0, 13);
+            this.layoutPanel_dices.Controls.Add(this.lbl_finalScore, 1, 14);
+            this.layoutPanel_dices.Controls.Add(this.lbl_totalScore, 0, 14);
             this.layoutPanel_dices.Location = new System.Drawing.Point(95, 18);
             this.layoutPanel_dices.Name = "layoutPanel_dices";
             this.layoutPanel_dices.RowCount = 15;
@@ -630,19 +632,6 @@
             this.dicePlay_ctrl.Size = new System.Drawing.Size(447, 189);
             this.dicePlay_ctrl.TabIndex = 11;
             // 
-            // lbl_d1Txt
-            // 
-            this.lbl_d1Txt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_d1Txt.AutoSize = true;
-            this.lbl_d1Txt.Location = new System.Drawing.Point(3, 0);
-            this.lbl_d1Txt.Name = "lbl_d1Txt";
-            this.lbl_d1Txt.Size = new System.Drawing.Size(158, 35);
-            this.lbl_d1Txt.TabIndex = 0;
-            this.lbl_d1Txt.Text = "dice 1: ";
-            this.lbl_d1Txt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // lbl_displayDice5
             // 
             this.lbl_displayDice5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -655,19 +644,6 @@
             this.lbl_displayDice5.TabIndex = 10;
             this.lbl_displayDice5.Text = "x";
             this.lbl_displayDice5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbl_displayDice1
-            // 
-            this.lbl_displayDice1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_displayDice1.AutoSize = true;
-            this.lbl_displayDice1.Location = new System.Drawing.Point(167, 0);
-            this.lbl_displayDice1.Name = "lbl_displayDice1";
-            this.lbl_displayDice1.Size = new System.Drawing.Size(158, 35);
-            this.lbl_displayDice1.TabIndex = 5;
-            this.lbl_displayDice1.Text = "x";
-            this.lbl_displayDice1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_d5Txt
             // 
@@ -830,6 +806,32 @@
             this.chk_holdD5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chk_holdD5.UseVisualStyleBackColor = true;
             // 
+            // lbl_d1Txt
+            // 
+            this.lbl_d1Txt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_d1Txt.AutoSize = true;
+            this.lbl_d1Txt.Location = new System.Drawing.Point(3, 0);
+            this.lbl_d1Txt.Name = "lbl_d1Txt";
+            this.lbl_d1Txt.Size = new System.Drawing.Size(158, 35);
+            this.lbl_d1Txt.TabIndex = 0;
+            this.lbl_d1Txt.Text = "dice 1: ";
+            this.lbl_d1Txt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_displayDice1
+            // 
+            this.lbl_displayDice1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_displayDice1.AutoSize = true;
+            this.lbl_displayDice1.Location = new System.Drawing.Point(167, 0);
+            this.lbl_displayDice1.Name = "lbl_displayDice1";
+            this.lbl_displayDice1.Size = new System.Drawing.Size(158, 35);
+            this.lbl_displayDice1.TabIndex = 5;
+            this.lbl_displayDice1.Text = "x";
+            this.lbl_displayDice1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // lbl_rollsLeft
             // 
             this.lbl_rollsLeft.AutoSize = true;
@@ -840,6 +842,21 @@
             this.lbl_rollsLeft.Size = new System.Drawing.Size(189, 32);
             this.lbl_rollsLeft.TabIndex = 4;
             this.lbl_rollsLeft.Text = "Rolls Left : X";
+            // 
+            // lbl_finalScore
+            // 
+            this.lbl_finalScore.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_finalScore.AutoSize = true;
+            this.lbl_finalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_finalScore.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbl_finalScore.Location = new System.Drawing.Point(164, 655);
+            this.lbl_finalScore.Name = "lbl_finalScore";
+            this.lbl_finalScore.Size = new System.Drawing.Size(72, 43);
+            this.lbl_finalScore.TabIndex = 30;
+            this.lbl_finalScore.Text = "0";
+            this.lbl_finalScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -923,6 +940,7 @@
         private System.Windows.Forms.CheckBox chk_holdD4;
         private System.Windows.Forms.CheckBox chk_holdD5;
         private System.Windows.Forms.Label lbl_rollsLeft;
+        private System.Windows.Forms.Label lbl_finalScore;
     }
 }
 
