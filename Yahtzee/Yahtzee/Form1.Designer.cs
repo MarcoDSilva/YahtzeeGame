@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btn_rollDice = new System.Windows.Forms.Button();
             this.layoutPanel_dices = new System.Windows.Forms.TableLayoutPanel();
-            this.lbl_totalScore = new System.Windows.Forms.Label();
             this.lbl_sixes = new System.Windows.Forms.Label();
             this.lbl_fives = new System.Windows.Forms.Label();
             this.lbl_fours = new System.Windows.Forms.Label();
@@ -60,6 +59,8 @@
             this.lbl_chance = new System.Windows.Forms.Label();
             this.lbl_scoreYat = new System.Windows.Forms.Label();
             this.lbl_yaht = new System.Windows.Forms.Label();
+            this.lbl_finalScore = new System.Windows.Forms.Label();
+            this.lbl_totalScore = new System.Windows.Forms.Label();
             this.scoreBox = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dicePlay_ctrl = new System.Windows.Forms.TableLayoutPanel();
@@ -79,7 +80,6 @@
             this.lbl_d1Txt = new System.Windows.Forms.Label();
             this.lbl_displayDice1 = new System.Windows.Forms.Label();
             this.lbl_rollsLeft = new System.Windows.Forms.Label();
-            this.lbl_finalScore = new System.Windows.Forms.Label();
             this.layoutPanel_dices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d2)).BeginInit();
@@ -159,22 +159,6 @@
             this.layoutPanel_dices.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutPanel_dices.Size = new System.Drawing.Size(242, 701);
             this.layoutPanel_dices.TabIndex = 1;
-            this.layoutPanel_dices.Paint += new System.Windows.Forms.PaintEventHandler(this.LayoutPanel_dices_Paint);
-            // 
-            // lbl_totalScore
-            // 
-            this.lbl_totalScore.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_totalScore.AutoSize = true;
-            this.lbl_totalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_totalScore.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_totalScore.Location = new System.Drawing.Point(6, 655);
-            this.lbl_totalScore.Name = "lbl_totalScore";
-            this.lbl_totalScore.Size = new System.Drawing.Size(149, 43);
-            this.lbl_totalScore.TabIndex = 29;
-            this.lbl_totalScore.Text = "Final Score";
-            this.lbl_totalScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_sixes
             // 
@@ -190,6 +174,7 @@
             this.lbl_sixes.TabIndex = 11;
             this.lbl_sixes.Text = "0";
             this.lbl_sixes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_sixes.Click += new System.EventHandler(this.label_click_sixes);
             // 
             // lbl_fives
             // 
@@ -205,6 +190,7 @@
             this.lbl_fives.TabIndex = 10;
             this.lbl_fives.Text = "0";
             this.lbl_fives.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_fives.Click += new System.EventHandler(this.label_click_fives);
             // 
             // lbl_fours
             // 
@@ -220,6 +206,7 @@
             this.lbl_fours.TabIndex = 9;
             this.lbl_fours.Text = "0";
             this.lbl_fours.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_fours.Click += new System.EventHandler(this.label_click_fours);
             // 
             // lbl_threes
             // 
@@ -235,6 +222,7 @@
             this.lbl_threes.TabIndex = 8;
             this.lbl_threes.Text = "0";
             this.lbl_threes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_threes.Click += new System.EventHandler(this.label_click_threes);
             // 
             // lbl_twos
             // 
@@ -250,6 +238,7 @@
             this.lbl_twos.TabIndex = 7;
             this.lbl_twos.Text = "0";
             this.lbl_twos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_twos.Click += new System.EventHandler(this.label_click_deuces);
             // 
             // lbl_aces
             // 
@@ -265,7 +254,7 @@
             this.lbl_aces.TabIndex = 6;
             this.lbl_aces.Text = "0";
             this.lbl_aces.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_aces.Click += new System.EventHandler(this.Lbl_aces_Click);
+            this.lbl_aces.Click += new System.EventHandler(this.label_click_aces);
             // 
             // picBox_d1
             // 
@@ -341,6 +330,7 @@
             this.lbl_score3Kind.TabIndex = 14;
             this.lbl_score3Kind.Text = "0";
             this.lbl_score3Kind.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_score3Kind.Click += new System.EventHandler(this.label_click_3Kind);
             // 
             // lbl_scoreBonus
             // 
@@ -416,6 +406,7 @@
             this.lbl_4KindScore.TabIndex = 18;
             this.lbl_4KindScore.Text = "0";
             this.lbl_4KindScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_4KindScore.Click += new System.EventHandler(this.label_click_4Kind);
             // 
             // lbl_scoreFH
             // 
@@ -431,6 +422,7 @@
             this.lbl_scoreFH.TabIndex = 19;
             this.lbl_scoreFH.Text = "0";
             this.lbl_scoreFH.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_scoreFH.Click += new System.EventHandler(this.label_click_FH);
             // 
             // lbl_scoreLStraight
             // 
@@ -446,6 +438,7 @@
             this.lbl_scoreLStraight.TabIndex = 20;
             this.lbl_scoreLStraight.Text = "0";
             this.lbl_scoreLStraight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_scoreLStraight.Click += new System.EventHandler(this.label_click_LS);
             // 
             // lbl_FH
             // 
@@ -506,6 +499,7 @@
             this.lbl_scoreHStraight.TabIndex = 24;
             this.lbl_scoreHStraight.Text = "0";
             this.lbl_scoreHStraight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_scoreHStraight.Click += new System.EventHandler(this.label_click_HS);
             // 
             // lbl_scoreChance
             // 
@@ -521,6 +515,7 @@
             this.lbl_scoreChance.TabIndex = 26;
             this.lbl_scoreChance.Text = "0";
             this.lbl_scoreChance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_scoreChance.Click += new System.EventHandler(this.label_click_chance);
             // 
             // lbl_chance
             // 
@@ -551,6 +546,7 @@
             this.lbl_scoreYat.TabIndex = 28;
             this.lbl_scoreYat.Text = "0";
             this.lbl_scoreYat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_scoreYat.Click += new System.EventHandler(this.label_click_yahtzee);
             // 
             // lbl_yaht
             // 
@@ -566,6 +562,36 @@
             this.lbl_yaht.TabIndex = 27;
             this.lbl_yaht.Text = "Yahtzee!";
             this.lbl_yaht.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_finalScore
+            // 
+            this.lbl_finalScore.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_finalScore.AutoSize = true;
+            this.lbl_finalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_finalScore.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbl_finalScore.Location = new System.Drawing.Point(164, 655);
+            this.lbl_finalScore.Name = "lbl_finalScore";
+            this.lbl_finalScore.Size = new System.Drawing.Size(72, 43);
+            this.lbl_finalScore.TabIndex = 30;
+            this.lbl_finalScore.Text = "0";
+            this.lbl_finalScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_totalScore
+            // 
+            this.lbl_totalScore.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_totalScore.AutoSize = true;
+            this.lbl_totalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_totalScore.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbl_totalScore.Location = new System.Drawing.Point(6, 655);
+            this.lbl_totalScore.Name = "lbl_totalScore";
+            this.lbl_totalScore.Size = new System.Drawing.Size(149, 43);
+            this.lbl_totalScore.TabIndex = 29;
+            this.lbl_totalScore.Text = "Final Score";
+            this.lbl_totalScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // scoreBox
             // 
@@ -583,7 +609,6 @@
             this.scoreBox.TabIndex = 2;
             this.scoreBox.TabStop = false;
             this.scoreBox.Text = "SCORES";
-            this.scoreBox.Enter += new System.EventHandler(this.ScoreBox_Enter);
             // 
             // groupBox1
             // 
@@ -843,21 +868,6 @@
             this.lbl_rollsLeft.TabIndex = 4;
             this.lbl_rollsLeft.Text = "Rolls Left : X";
             // 
-            // lbl_finalScore
-            // 
-            this.lbl_finalScore.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_finalScore.AutoSize = true;
-            this.lbl_finalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_finalScore.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_finalScore.Location = new System.Drawing.Point(164, 655);
-            this.lbl_finalScore.Name = "lbl_finalScore";
-            this.lbl_finalScore.Size = new System.Drawing.Size(72, 43);
-            this.lbl_finalScore.TabIndex = 30;
-            this.lbl_finalScore.Text = "0";
-            this.lbl_finalScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -922,17 +932,12 @@
         private System.Windows.Forms.Label lbl_scoreYat;
         private System.Windows.Forms.Label lbl_totalScore;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label lbl_displayDice5;
-        private System.Windows.Forms.Label lbl_displayDice4;
-        private System.Windows.Forms.Label lbl_displayDice3;
         private System.Windows.Forms.Label lbl_d5Txt;
         private System.Windows.Forms.Label lbl_d4Txt;
         private System.Windows.Forms.Label lbl_d3Txt;
         private System.Windows.Forms.Label lbl_d1Txt;
         private System.Windows.Forms.Label lbl_d2Txt;
         private System.Windows.Forms.Label lbl_aces;
-        private System.Windows.Forms.Label lbl_displayDice2;
-        private System.Windows.Forms.Label lbl_displayDice1;
         private System.Windows.Forms.TableLayoutPanel dicePlay_ctrl;
         private System.Windows.Forms.CheckBox chk_holdD1;
         private System.Windows.Forms.CheckBox chk_holdD2;
@@ -941,6 +946,11 @@
         private System.Windows.Forms.CheckBox chk_holdD5;
         private System.Windows.Forms.Label lbl_rollsLeft;
         private System.Windows.Forms.Label lbl_finalScore;
+        public System.Windows.Forms.Label lbl_displayDice5;
+        public System.Windows.Forms.Label lbl_displayDice4;
+        public System.Windows.Forms.Label lbl_displayDice3;
+        public System.Windows.Forms.Label lbl_displayDice2;
+        public System.Windows.Forms.Label lbl_displayDice1;
     }
 }
 
