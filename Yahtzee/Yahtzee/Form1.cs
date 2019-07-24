@@ -5,6 +5,7 @@
 using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace Yahtzee
 {
@@ -40,7 +41,7 @@ namespace Yahtzee
             {
                 lbl_displayDice5.Text = Convert.ToString(generator.DiceRng());
             }
-          
+
 
             higherScoreChecker();
             lowerScoreChecker();
@@ -283,162 +284,110 @@ namespace Yahtzee
         {
             Label click_aces = sender as Label;
 
-            if(click_aces.Enabled)
-            {
-                click_aces.Enabled = false;
-            }
+            if(click_aces.Enabled) { click_aces.Enabled = false;  }
 
-            if(!click_aces.Enabled)
-            {
-                lbl_aces.BackColor = Color.Yellow;
-            }
+            if(!click_aces.Enabled) { lbl_aces.BackColor = Color.Yellow; }
             
         }
         private void label_click_deuces(object sender, EventArgs e)
         {
             Label click_deuces = sender as Label;
 
-            if (click_deuces.Enabled)
-            {
-                click_deuces.Enabled = false;
-            }
+            if (click_deuces.Enabled)  { click_deuces.Enabled = false;  }
 
-            if (!click_deuces.Enabled)
-            {
-                click_deuces.BackColor = Color.Yellow;
-            }
+            if (!click_deuces.Enabled) { click_deuces.BackColor = Color.Yellow;  }
         }
 
         private void label_click_threes(object sender, EventArgs e)
         {
             Label click_three = sender as Label;
            
-            if (click_three.Enabled)
-            {
-                click_three.Enabled = false;
-            }
+            if (click_three.Enabled) { click_three.Enabled = false; }
 
-            if (!click_three.Enabled)
-            {
-                click_three.BackColor = Color.Yellow;
-            }
+            if (!click_three.Enabled) { click_three.BackColor = Color.Yellow;  }
         }
 
         private void label_click_fours(object sender, EventArgs e)
         {
             Label click_fours = sender as Label;
 
-            if (click_fours.Enabled)
-            {
-                click_fours.Enabled = false;
-            }
+            if (click_fours.Enabled)  { click_fours.Enabled = false;  }
 
-            if (!click_fours.Enabled)
-            {
-                click_fours.BackColor = Color.Yellow;
-            }
+            if (!click_fours.Enabled) { click_fours.BackColor = Color.Yellow; }
         }
 
         private void label_click_fives(object sender, EventArgs e)
         {
             Label click_fives = sender as Label;
 
-            if (click_fives.Enabled)
-            {
-                click_fives.Enabled = false;
-            }
+            if (click_fives.Enabled) { click_fives.Enabled = false; }
 
-            if (!click_fives.Enabled)
-            {
-                click_fives.BackColor = Color.Yellow;
-            }
+            if (!click_fives.Enabled)  { click_fives.BackColor = Color.Yellow; }
         }
 
         private void label_click_sixes(object sender, EventArgs e)
         {
             Label click_sixes = sender as Label;
 
-            if (click_sixes.Enabled)
-            {
-                click_sixes.Enabled = false;
-            }
+            if (click_sixes.Enabled) { click_sixes.Enabled = false; }
 
-            if (!click_sixes.Enabled)
-            {
-                click_sixes.BackColor = Color.Yellow;
-            }
-
+            if (!click_sixes.Enabled) { click_sixes.BackColor = Color.Yellow; }
         }
 
         private void label_click_3Kind(object sender, EventArgs e)
         {
             Label click_3kind = sender as Label;
 
-            if (click_3kind != null)
-            {
-                MessageBox.Show("3WAY LOCKED!");
-            }
+            if (click_3kind.Enabled) { click_3kind.Enabled = false;  }
+            if (!click_3kind.Enabled) { click_3kind.BackColor = Color.Yellow; }
         }
 
         private void label_click_4Kind(object sender, EventArgs e)
         {
             Label click_4way = sender as Label;
 
-            if (click_4way != null)
-            {
-                MessageBox.Show("4WAY LOCKED!");
-            }
+            if (click_4way.Enabled) { click_4way.Enabled = false; }
+            if (!click_4way.Enabled) { click_4way.BackColor = Color.Yellow; }
         }
 
         private void label_click_FH(object sender, EventArgs e)
         {
             Label click_fh = sender as Label;
 
-            if (click_fh != null)
-            {
-                MessageBox.Show("FH LOCKED!");
-            }
+            if (click_fh.Enabled) { click_fh.Enabled = false; }
+            if (!click_fh.Enabled) { click_fh.BackColor = Color.Yellow; }
         }
 
         private void label_click_LS(object sender, EventArgs e)
         {
             Label click_ls = sender as Label;
 
-            if (click_ls != null)
-            {
-                MessageBox.Show("LS LOCKED!");
-            }
+            if (click_ls.Enabled) { click_ls.Enabled = false; }
+            if (!click_ls.Enabled) { click_ls.BackColor = Color.Yellow; }
         }
 
         private void label_click_HS(object sender, EventArgs e)
         {
             Label click_hs = sender as Label;
 
-            if (click_hs != null)
-            {
-                MessageBox.Show("HS LOCKED!");
-            }
+            if (click_hs.Enabled) { click_hs.Enabled = false; }
+            if (!click_hs.Enabled) { click_hs.BackColor = Color.Yellow; }
         }
 
         private void label_click_chance(object sender, EventArgs e)
         {
             Label click_chance = sender as Label;
 
-            if (click_chance != null)
-            {
-                MessageBox.Show("CHANCE LOCKED!");
-            }
-
+            if (click_chance.Enabled) { click_chance.Enabled = false; }
+            if (!click_chance.Enabled) { click_chance.BackColor = Color.Yellow; }
         }
 
         private void label_click_yahtzee(object sender, EventArgs e)
         {
             Label click_yahtzee = sender as Label;
-
-            if (click_yahtzee != null)
-            {
-                MessageBox.Show("YAHTZEE LOCKED!");
-            }
+           
+            if (click_yahtzee.Enabled) { click_yahtzee.Enabled = false; }
+            if (!click_yahtzee.Enabled) { click_yahtzee.BackColor = Color.Yellow; }
         }
     }
 }
