@@ -79,8 +79,10 @@
             this.lbl_scoreBonus = new System.Windows.Forms.Label();
             this.lbl_sixes = new System.Windows.Forms.Label();
             this.scoreBox = new System.Windows.Forms.GroupBox();
-            this.HIgher_Score = new System.Windows.Forms.GroupBox();
             this.LowerScoreGroup = new System.Windows.Forms.GroupBox();
+            this.HIgher_Score = new System.Windows.Forms.GroupBox();
+            this.NewGameStrip = new System.Windows.Forms.MenuStrip();
+            this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.dicePlay_ctrl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d3)).BeginInit();
@@ -90,8 +92,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d6)).BeginInit();
             this.scoreBox.SuspendLayout();
-            this.HIgher_Score.SuspendLayout();
             this.LowerScoreGroup.SuspendLayout();
+            this.HIgher_Score.SuspendLayout();
+            this.NewGameStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_rollDice
@@ -113,7 +116,8 @@
             this.lbl_score3Kind.AutoSize = true;
             this.lbl_score3Kind.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_score3Kind.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_score3Kind.Location = new System.Drawing.Point(215, 20);
+            this.lbl_score3Kind.Location = new System.Drawing.Point(213, 25);
+            this.lbl_score3Kind.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_score3Kind.Name = "lbl_score3Kind";
             this.lbl_score3Kind.Size = new System.Drawing.Size(35, 38);
             this.lbl_score3Kind.TabIndex = 14;
@@ -127,11 +131,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_4ofAKind.AutoSize = true;
-            this.lbl_4ofAKind.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_4ofAKind.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_4ofAKind.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_4ofAKind.Location = new System.Drawing.Point(22, 62);
+            this.lbl_4ofAKind.Location = new System.Drawing.Point(16, 70);
             this.lbl_4ofAKind.Name = "lbl_4ofAKind";
-            this.lbl_4ofAKind.Size = new System.Drawing.Size(128, 24);
+            this.lbl_4ofAKind.Size = new System.Drawing.Size(148, 27);
             this.lbl_4ofAKind.TabIndex = 16;
             this.lbl_4ofAKind.Text = "Four of a Kind";
             this.lbl_4ofAKind.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -142,11 +146,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_3ofAKind.AutoSize = true;
-            this.lbl_3ofAKind.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_3ofAKind.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_3ofAKind.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_3ofAKind.Location = new System.Drawing.Point(22, 24);
+            this.lbl_3ofAKind.Location = new System.Drawing.Point(17, 31);
             this.lbl_3ofAKind.Name = "lbl_3ofAKind";
-            this.lbl_3ofAKind.Size = new System.Drawing.Size(139, 24);
+            this.lbl_3ofAKind.Size = new System.Drawing.Size(157, 27);
             this.lbl_3ofAKind.TabIndex = 13;
             this.lbl_3ofAKind.Text = "Three of a Kind";
             this.lbl_3ofAKind.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -159,7 +163,8 @@
             this.lbl_4KindScore.AutoSize = true;
             this.lbl_4KindScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_4KindScore.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_4KindScore.Location = new System.Drawing.Point(215, 58);
+            this.lbl_4KindScore.Location = new System.Drawing.Point(214, 62);
+            this.lbl_4KindScore.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_4KindScore.Name = "lbl_4KindScore";
             this.lbl_4KindScore.Size = new System.Drawing.Size(35, 38);
             this.lbl_4KindScore.TabIndex = 18;
@@ -175,7 +180,8 @@
             this.lbl_scoreFH.AutoSize = true;
             this.lbl_scoreFH.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_scoreFH.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_scoreFH.Location = new System.Drawing.Point(215, 96);
+            this.lbl_scoreFH.Location = new System.Drawing.Point(214, 100);
+            this.lbl_scoreFH.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_scoreFH.Name = "lbl_scoreFH";
             this.lbl_scoreFH.Size = new System.Drawing.Size(35, 38);
             this.lbl_scoreFH.TabIndex = 19;
@@ -191,7 +197,8 @@
             this.lbl_scoreLStraight.AutoSize = true;
             this.lbl_scoreLStraight.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_scoreLStraight.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_scoreLStraight.Location = new System.Drawing.Point(215, 135);
+            this.lbl_scoreLStraight.Location = new System.Drawing.Point(214, 141);
+            this.lbl_scoreLStraight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_scoreLStraight.Name = "lbl_scoreLStraight";
             this.lbl_scoreLStraight.Size = new System.Drawing.Size(35, 38);
             this.lbl_scoreLStraight.TabIndex = 20;
@@ -205,11 +212,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_FH.AutoSize = true;
-            this.lbl_FH.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_FH.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_FH.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_FH.Location = new System.Drawing.Point(22, 99);
+            this.lbl_FH.Location = new System.Drawing.Point(16, 107);
             this.lbl_FH.Name = "lbl_FH";
-            this.lbl_FH.Size = new System.Drawing.Size(102, 24);
+            this.lbl_FH.Size = new System.Drawing.Size(111, 27);
             this.lbl_FH.TabIndex = 21;
             this.lbl_FH.Text = "Full House";
             this.lbl_FH.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -220,11 +227,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_LScore.AutoSize = true;
-            this.lbl_LScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_LScore.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_LScore.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_LScore.Location = new System.Drawing.Point(22, 139);
+            this.lbl_LScore.Location = new System.Drawing.Point(17, 146);
             this.lbl_LScore.Name = "lbl_LScore";
-            this.lbl_LScore.Size = new System.Drawing.Size(112, 24);
+            this.lbl_LScore.Size = new System.Drawing.Size(132, 27);
             this.lbl_LScore.TabIndex = 22;
             this.lbl_LScore.Text = "Low Straight";
             this.lbl_LScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -235,11 +242,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_HSCore.AutoSize = true;
-            this.lbl_HSCore.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_HSCore.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_HSCore.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_HSCore.Location = new System.Drawing.Point(22, 178);
+            this.lbl_HSCore.Location = new System.Drawing.Point(17, 190);
             this.lbl_HSCore.Name = "lbl_HSCore";
-            this.lbl_HSCore.Size = new System.Drawing.Size(117, 24);
+            this.lbl_HSCore.Size = new System.Drawing.Size(138, 27);
             this.lbl_HSCore.TabIndex = 23;
             this.lbl_HSCore.Text = "High Straight";
             this.lbl_HSCore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -252,7 +259,8 @@
             this.lbl_scoreHStraight.AutoSize = true;
             this.lbl_scoreHStraight.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_scoreHStraight.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_scoreHStraight.Location = new System.Drawing.Point(215, 177);
+            this.lbl_scoreHStraight.Location = new System.Drawing.Point(215, 184);
+            this.lbl_scoreHStraight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_scoreHStraight.Name = "lbl_scoreHStraight";
             this.lbl_scoreHStraight.Size = new System.Drawing.Size(35, 38);
             this.lbl_scoreHStraight.TabIndex = 24;
@@ -268,7 +276,8 @@
             this.lbl_scoreChance.AutoSize = true;
             this.lbl_scoreChance.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_scoreChance.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_scoreChance.Location = new System.Drawing.Point(215, 218);
+            this.lbl_scoreChance.Location = new System.Drawing.Point(215, 228);
+            this.lbl_scoreChance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_scoreChance.Name = "lbl_scoreChance";
             this.lbl_scoreChance.Size = new System.Drawing.Size(35, 38);
             this.lbl_scoreChance.TabIndex = 26;
@@ -282,11 +291,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_chance.AutoSize = true;
-            this.lbl_chance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_chance.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_chance.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_chance.Location = new System.Drawing.Point(22, 219);
+            this.lbl_chance.Location = new System.Drawing.Point(17, 231);
             this.lbl_chance.Name = "lbl_chance";
-            this.lbl_chance.Size = new System.Drawing.Size(76, 24);
+            this.lbl_chance.Size = new System.Drawing.Size(81, 27);
             this.lbl_chance.TabIndex = 25;
             this.lbl_chance.Text = "Chance";
             this.lbl_chance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -299,7 +308,8 @@
             this.lbl_scoreYat.AutoSize = true;
             this.lbl_scoreYat.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_scoreYat.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_scoreYat.Location = new System.Drawing.Point(215, 262);
+            this.lbl_scoreYat.Location = new System.Drawing.Point(215, 272);
+            this.lbl_scoreYat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_scoreYat.Name = "lbl_scoreYat";
             this.lbl_scoreYat.Size = new System.Drawing.Size(35, 38);
             this.lbl_scoreYat.TabIndex = 28;
@@ -313,11 +323,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_yaht.AutoSize = true;
-            this.lbl_yaht.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_yaht.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_yaht.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_yaht.Location = new System.Drawing.Point(22, 259);
+            this.lbl_yaht.Location = new System.Drawing.Point(17, 275);
             this.lbl_yaht.Name = "lbl_yaht";
-            this.lbl_yaht.Size = new System.Drawing.Size(83, 24);
+            this.lbl_yaht.Size = new System.Drawing.Size(92, 27);
             this.lbl_yaht.TabIndex = 27;
             this.lbl_yaht.Text = "Yahtzee!";
             this.lbl_yaht.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -330,7 +340,8 @@
             this.lbl_finalScore.AutoSize = true;
             this.lbl_finalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_finalScore.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_finalScore.Location = new System.Drawing.Point(215, 312);
+            this.lbl_finalScore.Location = new System.Drawing.Point(215, 314);
+            this.lbl_finalScore.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_finalScore.Name = "lbl_finalScore";
             this.lbl_finalScore.Size = new System.Drawing.Size(35, 38);
             this.lbl_finalScore.TabIndex = 30;
@@ -343,11 +354,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_totalScore.AutoSize = true;
-            this.lbl_totalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_totalScore.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_totalScore.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_totalScore.Location = new System.Drawing.Point(15, 316);
+            this.lbl_totalScore.Location = new System.Drawing.Point(17, 319);
             this.lbl_totalScore.Name = "lbl_totalScore";
-            this.lbl_totalScore.Size = new System.Drawing.Size(106, 24);
+            this.lbl_totalScore.Size = new System.Drawing.Size(116, 27);
             this.lbl_totalScore.TabIndex = 29;
             this.lbl_totalScore.Text = "Final Score";
             this.lbl_totalScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -802,40 +813,15 @@
             this.scoreBox.Controls.Add(this.LowerScoreGroup);
             this.scoreBox.Controls.Add(this.HIgher_Score);
             this.scoreBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.scoreBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scoreBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scoreBox.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.scoreBox.Location = new System.Drawing.Point(748, 0);
+            this.scoreBox.Location = new System.Drawing.Point(571, 12);
             this.scoreBox.Name = "scoreBox";
             this.scoreBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.scoreBox.Size = new System.Drawing.Size(724, 447);
             this.scoreBox.TabIndex = 2;
             this.scoreBox.TabStop = false;
             this.scoreBox.Text = "SCORES";
-            // 
-            // HIgher_Score
-            // 
-            this.HIgher_Score.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.HIgher_Score.Controls.Add(this.picBox_d1);
-            this.HIgher_Score.Controls.Add(this.picBox_d3);
-            this.HIgher_Score.Controls.Add(this.picBox_d2);
-            this.HIgher_Score.Controls.Add(this.lbl_threes);
-            this.HIgher_Score.Controls.Add(this.picBox_d4);
-            this.HIgher_Score.Controls.Add(this.lbl_fours);
-            this.HIgher_Score.Controls.Add(this.picBox_d5);
-            this.HIgher_Score.Controls.Add(this.lbl_twos);
-            this.HIgher_Score.Controls.Add(this.lbl_bonus);
-            this.HIgher_Score.Controls.Add(this.lbl_fives);
-            this.HIgher_Score.Controls.Add(this.picBox_d6);
-            this.HIgher_Score.Controls.Add(this.lbl_aces);
-            this.HIgher_Score.Controls.Add(this.lbl_scoreBonus);
-            this.HIgher_Score.Controls.Add(this.lbl_sixes);
-            this.HIgher_Score.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.HIgher_Score.Location = new System.Drawing.Point(58, 27);
-            this.HIgher_Score.Name = "HIgher_Score";
-            this.HIgher_Score.Size = new System.Drawing.Size(296, 359);
-            this.HIgher_Score.TabIndex = 5;
-            this.HIgher_Score.TabStop = false;
-            this.HIgher_Score.Text = "Higher Score";
             // 
             // LowerScoreGroup
             // 
@@ -864,17 +850,65 @@
             this.LowerScoreGroup.TabStop = false;
             this.LowerScoreGroup.Text = "Lower Score";
             // 
+            // HIgher_Score
+            // 
+            this.HIgher_Score.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.HIgher_Score.Controls.Add(this.picBox_d1);
+            this.HIgher_Score.Controls.Add(this.picBox_d3);
+            this.HIgher_Score.Controls.Add(this.picBox_d2);
+            this.HIgher_Score.Controls.Add(this.lbl_threes);
+            this.HIgher_Score.Controls.Add(this.picBox_d4);
+            this.HIgher_Score.Controls.Add(this.lbl_fours);
+            this.HIgher_Score.Controls.Add(this.picBox_d5);
+            this.HIgher_Score.Controls.Add(this.lbl_twos);
+            this.HIgher_Score.Controls.Add(this.lbl_bonus);
+            this.HIgher_Score.Controls.Add(this.lbl_fives);
+            this.HIgher_Score.Controls.Add(this.picBox_d6);
+            this.HIgher_Score.Controls.Add(this.lbl_aces);
+            this.HIgher_Score.Controls.Add(this.lbl_scoreBonus);
+            this.HIgher_Score.Controls.Add(this.lbl_sixes);
+            this.HIgher_Score.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.HIgher_Score.Location = new System.Drawing.Point(58, 27);
+            this.HIgher_Score.Name = "HIgher_Score";
+            this.HIgher_Score.Size = new System.Drawing.Size(296, 359);
+            this.HIgher_Score.TabIndex = 5;
+            this.HIgher_Score.TabStop = false;
+            this.HIgher_Score.Text = "Higher Score";
+            // 
+            // NewGameStrip
+            // 
+            this.NewGameStrip.BackColor = System.Drawing.Color.ForestGreen;
+            this.NewGameStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.NewGameStrip.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NewGameStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.NewGameStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newGameToolStripMenuItem});
+            this.NewGameStrip.Location = new System.Drawing.Point(4, 0);
+            this.NewGameStrip.Name = "NewGameStrip";
+            this.NewGameStrip.Size = new System.Drawing.Size(130, 33);
+            this.NewGameStrip.TabIndex = 5;
+            this.NewGameStrip.Text = "New_Game";
+            // 
+            // newGameToolStripMenuItem
+            // 
+            this.newGameToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Control;
+            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(122, 29);
+            this.newGameToolStripMenuItem.Text = "New Game";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGreen;
-            this.ClientSize = new System.Drawing.Size(1498, 529);
+            this.ClientSize = new System.Drawing.Size(1330, 529);
             this.Controls.Add(this.lbl_rollsLeft);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.scoreBox);
             this.Controls.Add(this.btn_rollDice);
+            this.Controls.Add(this.NewGameStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.NewGameStrip;
             this.Name = "Form1";
             this.Text = "Yahtzee!!!";
             this.groupBox1.ResumeLayout(false);
@@ -887,10 +921,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d6)).EndInit();
             this.scoreBox.ResumeLayout(false);
-            this.HIgher_Score.ResumeLayout(false);
-            this.HIgher_Score.PerformLayout();
             this.LowerScoreGroup.ResumeLayout(false);
             this.LowerScoreGroup.PerformLayout();
+            this.HIgher_Score.ResumeLayout(false);
+            this.HIgher_Score.PerformLayout();
+            this.NewGameStrip.ResumeLayout(false);
+            this.NewGameStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -950,6 +986,8 @@
         private System.Windows.Forms.GroupBox scoreBox;
         private System.Windows.Forms.GroupBox LowerScoreGroup;
         private System.Windows.Forms.GroupBox HIgher_Score;
+        private System.Windows.Forms.MenuStrip NewGameStrip;
+        private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
     }
 }
 

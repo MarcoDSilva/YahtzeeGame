@@ -3,9 +3,12 @@
 //started at 7 july 2019
 
 /*TODO LIST:
+ * SEPARATE LOWER SCORE IN TINY METHODS INSTEAD OF ALL BEING INSIDE THE SAME METHOD - working on it
+ * PUTTING THE DICE SCORES IN ARRAY FOR EASY ACCESS IN THE METHODS - working on it
+ * NEW GAME BUTTON
+ * ===========================
  * COUNTER LIMIT OF 3 PLAYS , THEN PLAYER HAS TO LOCK ONE OF THE OPTIONS EVEN WITH 0 POINTS
  * TERMINATING THE GAME AND RETURNING THE FINAL SCORE AS POPUP WHEN ALL 13 OPTIONS ARE USED
- * NEW GAME BUTTON
  * DESIGN MISC.
  * BOT PLAYER || 2 PLAYERS
  * BUG FIXING
@@ -27,19 +30,30 @@ namespace Yahtzee
             InitializeComponent();
         }
 
+        //PUBLIC ARRAY FOR DICES
+        public int[] playingDiceArr = new int[5] {0,0,0,0,0};
+
+        //BUTTON THAT ROLLS THE DICES
         private void Btn_rollDice_Click(object sender, EventArgs e)
         {
             Rng generator = new Rng();
-        
+            CheckBox[] playerPick = { chk_holdD1, chk_holdD2, chk_holdD3, chk_holdD4, chk_holdD5 };
+            Label[] playingDices = { lbl_displayDice1, lbl_displayDice2, lbl_displayDice3, lbl_displayDice4, lbl_displayDice5 };
+
+            int i = 0; //iterator for loop
+
             //passes the dice rng to the respective labels
-            if (chk_holdD1.Checked != true)  { lbl_displayDice1.Text = Convert.ToString(generator.DiceRng()); }
-            if (chk_holdD2.Checked != true)  { lbl_displayDice2.Text = Convert.ToString(generator.DiceRng()); }
-            if (chk_holdD3.Checked != true)  { lbl_displayDice3.Text = Convert.ToString(generator.DiceRng()); }
-            if (chk_holdD4.Checked != true)  { lbl_displayDice4.Text = Convert.ToString(generator.DiceRng()); }
-            if (chk_holdD5.Checked != true)  { lbl_displayDice5.Text = Convert.ToString(generator.DiceRng()); }
+            foreach (CheckBox box in playerPick)
+            {
+                if(box.Checked != true) {
+                    playingDices[i].Text = Convert.ToString(playingDiceArr[i] = generator.DiceRng()); 
+                }
+                i++;
+            }
 
             higherScoreChecker();
             lowerScoreChecker();
+            TotalScoreFinals();
         }
       
         //checks the dice value with the respective score part (aces, twos etc...)
@@ -47,32 +61,26 @@ namespace Yahtzee
         {
             int counter = 0;
 
-            if (Convert.ToInt32(lbl_displayDice1.Text) == checker) { counter++; }
-            if (Convert.ToInt32(lbl_displayDice2.Text) == checker) { counter++; }
-            if (Convert.ToInt32(lbl_displayDice3.Text) == checker) { counter++; }
-            if (Convert.ToInt32(lbl_displayDice4.Text) == checker) { counter++; }
-            if (Convert.ToInt32(lbl_displayDice5.Text) == checker) { counter++; }
+            foreach(int dice in playingDiceArr)
+            {
+                if(dice == checker) { counter++; }
+            }
 
             return counter;
         }
 
-        //calls the method that does the conditional that checks the dice, checks all possible combinations
+        //verifies the number of dices from Aces to Sixes score and multiplies it by the respective number if more than one dice
+        //if the background is yellow, stops the verification, which means the dice was locked by the player
         public void higherScoreChecker()
         {
-            //verifies the number of dices from Aces to Sixes score and multiplies it by the respective number if more than one dice
-            //if the background is yellow, stops the verification, which means the dice was locked by the player
-            if(lbl_aces.BackColor != Color.Yellow) { lbl_aces.Text = Convert.ToString(SimpleDices(1)); }
+            Label[] diceValues = { lbl_aces, lbl_twos, lbl_threes, lbl_fours, lbl_fives, lbl_sixes };
+            int i = 1;
 
-            if(lbl_twos.BackColor != Color.Yellow) { lbl_twos.Text = Convert.ToString(SimpleDices(2) * 2); }
-
-            if(lbl_threes.BackColor != Color.Yellow) { lbl_threes.Text = Convert.ToString(SimpleDices(3) * 3);}
-
-            if (lbl_fours.BackColor != Color.Yellow) { lbl_fours.Text = Convert.ToString(SimpleDices(4) * 4); }
-
-            if (lbl_fives.BackColor != Color.Yellow) { lbl_fives.Text = Convert.ToString(SimpleDices(5) * 5); }
-
-            if (lbl_sixes.BackColor != Color.Yellow) { lbl_sixes.Text = Convert.ToString(SimpleDices(6) * 6); }
-
+            foreach(Label diceScore in diceValues)
+            {
+                if(diceScore.BackColor != Color.Yellow) { diceScore.Text = Convert.ToString(SimpleDices(i) * i); }
+                i++;
+            }
         }
 
         //method that verifies the bottom part
@@ -88,8 +96,9 @@ namespace Yahtzee
             int dice5 = SimpleDices(5);
             int dice6 = SimpleDices(6);
 
-            //gets the value of the actual rolled dices
-            //to use for calculations
+            //gets the value of the actual rolled dices in the board
+            //these values are used to sum their value to the respective category that is picked by the user
+            //EX: three of a kind was picked? sum all dices value
             int dice1_val = Convert.ToInt32(lbl_displayDice1.Text);
             int dice2_val = Convert.ToInt32(lbl_displayDice2.Text);
             int dice3_val = Convert.ToInt32(lbl_displayDice3.Text);
@@ -106,7 +115,7 @@ namespace Yahtzee
             bool yahtzeeBool = false;
             
 
-            //========= verifies if the player has picked the label with the respective score =======
+            //========= verifies if the player has locked the label with the respective score =======
             if (lbl_score3Kind.BackColor == Color.Yellow) { threeKindBool = true; }
             if (lbl_4KindScore.BackColor == Color.Yellow) { fourKindBool = true; }
             if (lbl_scoreFH.BackColor == Color.Yellow) { fullHouseBool = true; }
@@ -128,10 +137,7 @@ namespace Yahtzee
                 {
                     lbl_score3Kind.Text = Convert.ToString(dice1_val + dice2_val + dice3_val + dice4_val + dice5_val);
                 }
-                else
-                {
-                    lbl_score3Kind.Text = "0";
-                }
+                else { lbl_score3Kind.Text = "0"; }
             }
 
             //================= four of a kind =================
@@ -141,10 +147,7 @@ namespace Yahtzee
                 {
                     lbl_4KindScore.Text = Convert.ToString(dice1_val + dice2_val + dice3_val + dice4_val + dice5_val);
                 }
-                else
-                {
-                    lbl_4KindScore.Text = "0";
-                }
+                else { lbl_4KindScore.Text = "0"; }
             }
 
             //============full house =================
@@ -155,10 +158,7 @@ namespace Yahtzee
                 {
                     lbl_scoreFH.Text = "25";
                 }
-                else
-                {
-                    lbl_scoreFH.Text = "0";
-                }
+                else { lbl_scoreFH.Text = "0";}
 
             }
 
@@ -171,10 +171,7 @@ namespace Yahtzee
                 {
                     lbl_scoreLStraight.Text = "30";
                 }
-                else
-                {
-                    lbl_scoreLStraight.Text = "0";
-                }
+                else { lbl_scoreLStraight.Text = "0"; }
             }
 
             //================= large straight =================
@@ -185,10 +182,7 @@ namespace Yahtzee
                 {
                     lbl_scoreHStraight.Text = "40";
                 }
-                else
-                {
-                    lbl_scoreHStraight.Text = "0";
-                }
+                else { lbl_scoreHStraight.Text = "0"; }
             }
 
             //================= yahtzee =================
@@ -198,12 +192,13 @@ namespace Yahtzee
                 {
                     lbl_scoreYat.Text = "50";
                 }
-                else
-                {
-                    lbl_scoreYat.Text = "0";
-                }
+                else { lbl_scoreYat.Text = "0"; }
             }
-
+           
+        }
+        // ================= SCORES =======================
+        public void TotalScoreFinals()
+        {
             //======== int conversions for final score ======== 
             int acesScore = Convert.ToInt32(lbl_aces.Text);
             int twosScore = Convert.ToInt32(lbl_twos.Text);
@@ -213,11 +208,11 @@ namespace Yahtzee
             int sixesScore = Convert.ToInt32(lbl_sixes.Text);
 
             // ======= BONUS =======
-            if (acesScore + twosScore + threeScore + fourScore + fiveScore + sixesScore >= 63) {
+            if (acesScore + twosScore + threeScore + fourScore + fiveScore + sixesScore >= 63)
+            {
                 lbl_scoreBonus.Text = "35";
-            } 
-
-
+            }
+            
             int bonus = Convert.ToInt32(lbl_scoreBonus.Text);
             int threeKind = Convert.ToInt32(lbl_score3Kind.Text);
             int fourKind = Convert.ToInt32(lbl_4KindScore.Text);
@@ -226,9 +221,9 @@ namespace Yahtzee
             int chance = Convert.ToInt32(lbl_scoreChance.Text);
             int yahtzee_score = Convert.ToInt32(lbl_scoreYat.Text);
 
-             //========  total score ======== 
-             int grandTotal = acesScore + twosScore + threeScore + fourScore + fiveScore + sixesScore + bonus + threeKind + fourKind
-                            + low_straight + high_straight + chance + yahtzee_score;
+            //========  total score ======== 
+            int grandTotal = acesScore + twosScore + threeScore + fourScore + fiveScore + sixesScore + bonus + threeKind + fourKind
+                           + low_straight + high_straight + chance + yahtzee_score;
 
             //========  final score  ========  
             lbl_finalScore.Text = Convert.ToString(grandTotal);
