@@ -4,7 +4,7 @@
 
 /*TODO LIST:
  * SEPARATE LOWER SCORE IN TINY METHODS INSTEAD OF ALL BEING INSIDE THE SAME METHOD - working on it
- * PUTTING THE DICE SCORES IN ARRAY FOR EASY ACCESS IN THE METHODS - working on it
+ * REFACTOR some waste of variavels to use the now made arrays, and switch some to arrays as well
  * NEW GAME BUTTON
  * ===========================
  * COUNTER LIMIT OF 3 PLAYS , THEN PLAYER HAS TO LOCK ONE OF THE OPTIONS EVEN WITH 0 POINTS
@@ -38,19 +38,32 @@ namespace Yahtzee
         {
             Rng generator = new Rng();
             CheckBox[] playerPick = { chk_holdD1, chk_holdD2, chk_holdD3, chk_holdD4, chk_holdD5 };
-            Label[] playingDices = { lbl_displayDice1, lbl_displayDice2, lbl_displayDice3, lbl_displayDice4, lbl_displayDice5 };
+            PictureBox[] playingDicePictures = { pic_roll1 , pic_roll2, pic_roll3, pic_roll4, pic_roll5};
+            Image[] images = { Properties.Resources.d1, Properties.Resources.d2, Properties.Resources.d3, Properties.Resources.d4, Properties.Resources.d5, Properties.Resources.d6 };
 
-            int i = 0; //iterator for loop
+            int i = 0; //iterator
 
-            //passes the dice rng to the respective labels
+            //rng to get the dices a new value if the user hadn't locked any
             foreach (CheckBox box in playerPick)
             {
                 if(box.Checked != true) {
-                    playingDices[i].Text = Convert.ToString(playingDiceArr[i] = generator.DiceRng()); 
+                    playingDiceArr[i] = generator.DiceRng(); 
                 }
                 i++;
             }
 
+            //loop to change the dice picture box to the img dice corresponding to the value that was given by the rng
+
+            int k = 0; //iterator 
+            foreach (int dice in playingDiceArr)
+            {
+                for (int j = 1; j <= 6; j++)
+                {
+                    if (dice.Equals(j))  {  playingDicePictures[k].Image = images[j - 1]; }
+                }
+                k++;
+            }
+           
             higherScoreChecker();
             lowerScoreChecker();
             TotalScoreFinals();
@@ -88,22 +101,17 @@ namespace Yahtzee
         public void lowerScoreChecker()
         {
             //calls the method that counts the number of dices corresponding to searched dice
-            //dice1 gets the total of number 1 dices, dice2 the number of dices number 2 , etc...
-            int dice1 = SimpleDices(1);
-            int dice2 = SimpleDices(2);
-            int dice3 = SimpleDices(3);
-            int dice4 = SimpleDices(4);
-            int dice5 = SimpleDices(5);
-            int dice6 = SimpleDices(6);
+            //diceCount[0] gets the total of number 1 dices, diceCount[1] the number of dices number 2 , etc...
+            int[] diceCount = { SimpleDices(1), SimpleDices(2), SimpleDices(3), SimpleDices(4), SimpleDices(5), SimpleDices(6) };
 
             //gets the value of the actual rolled dices in the board
             //these values are used to sum their value to the respective category that is picked by the user
             //EX: three of a kind was picked? sum all dices value
-            int dice1_val = Convert.ToInt32(lbl_displayDice1.Text);
-            int dice2_val = Convert.ToInt32(lbl_displayDice2.Text);
-            int dice3_val = Convert.ToInt32(lbl_displayDice3.Text);
-            int dice4_val = Convert.ToInt32(lbl_displayDice4.Text);
-            int dice5_val = Convert.ToInt32(lbl_displayDice5.Text);
+            int dice1_val = playingDiceArr[0];
+            int dice2_val = playingDiceArr[1];
+            int dice3_val = playingDiceArr[2];
+            int dice4_val = playingDiceArr[3];
+            int dice5_val = playingDiceArr[4];
 
             //======== Booleans to block the label score =========
             bool chanceBool = false;
@@ -127,13 +135,13 @@ namespace Yahtzee
             //================= chance =================
             if (!chanceBool)
             {
-                lbl_scoreChance.Text = Convert.ToString(dice1 + (dice2 * 2) + (dice3 * 3) + (dice4 * 4) + (dice5 * 5) + (dice6 * 6));
+                lbl_scoreChance.Text = Convert.ToString(diceCount[0] + (diceCount[1] * 2) + (diceCount[2] * 3) + (diceCount[3] * 4) + (diceCount[4] * 5) + (diceCount[5] * 6));
             }            
 
             //================= three of a kind =================
             if (!threeKindBool)
             {
-                if (dice1 >= 3 || dice2 >= 3 || dice3 >= 3 || dice4 >= 3 || dice5 >= 3 || dice6 >= 3)
+                if (diceCount[0] >= 3 || diceCount[1] >= 3 || diceCount[2] >= 3 || diceCount[3] >= 3 || diceCount[4] >= 3 || diceCount[5] >= 3)
                 {
                     lbl_score3Kind.Text = Convert.ToString(dice1_val + dice2_val + dice3_val + dice4_val + dice5_val);
                 }
@@ -143,7 +151,7 @@ namespace Yahtzee
             //================= four of a kind =================
             if (!fourKindBool)
             {                
-                if (dice1 >= 4 || dice2 >= 4 || dice3 >= 4 || dice4 >= 4 || dice5 >= 4 || dice6 >= 4)
+                if (diceCount[0] >= 4 || diceCount[1] >= 4 || diceCount[2] >= 4 || diceCount[3] >= 4 || diceCount[4] >= 4 || diceCount[5] >= 4)
                 {
                     lbl_4KindScore.Text = Convert.ToString(dice1_val + dice2_val + dice3_val + dice4_val + dice5_val);
                 }
@@ -153,8 +161,8 @@ namespace Yahtzee
             //============full house =================
             if (!fullHouseBool)
             {
-                if ((dice1 == 3 || dice2 == 3 || dice3 == 3 || dice4 == 3 || dice5 == 3 || dice6 == 3) &&
-                (dice1 == 2 || dice2 == 2 || dice3 == 2 || dice4 == 2 || dice5 == 2 || dice6 == 2))
+                if ((diceCount[0] == 3 || diceCount[1] == 3 || diceCount[2] == 3 || diceCount[3] == 3 || diceCount[4] == 3 || diceCount[5] == 3) &&
+                (diceCount[0] == 2 || diceCount[1] == 2 || diceCount[2] == 2 || diceCount[3] == 2 || diceCount[4] == 2 || diceCount[5] == 2))
                 {
                     lbl_scoreFH.Text = "25";
                 }
@@ -188,7 +196,7 @@ namespace Yahtzee
             //================= yahtzee =================
             if(!yahtzeeBool)
             {
-                if (dice1 == 5 || dice2 == 5 || dice3 == 5 || dice4 == 5 || dice5 == 5 || dice6 == 5)
+                if (diceCount[0] == 5 || diceCount[1] == 5 || diceCount[2] == 5 || diceCount[3] == 5 || diceCount[4] == 5 || diceCount[5] == 5)
                 {
                     lbl_scoreYat.Text = "50";
                 }
@@ -196,6 +204,7 @@ namespace Yahtzee
             }
            
         }
+
         // ================= SCORES =======================
         public void TotalScoreFinals()
         {
