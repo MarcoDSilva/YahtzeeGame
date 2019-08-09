@@ -4,7 +4,7 @@
 
 /*TODO LIST:
  * SEPARATE LOWER SCORE IN TINY METHODS INSTEAD OF ALL BEING INSIDE THE SAME METHOD - working on it
- * REFACTOR some waste of variavels to use the now made arrays, and switch some to arrays as well
+ * Make one array and fix the int array bug that requires to call twicce in dif methods
  * NEW GAME BUTTON
  * ===========================
  * COUNTER LIMIT OF 3 PLAYS , THEN PLAYER HAS TO LOCK ONE OF THE OPTIONS EVEN WITH 0 POINTS
@@ -30,8 +30,20 @@ namespace Yahtzee
             InitializeComponent();
         }
 
-        //PUBLIC ARRAY FOR DICES
+        //Public arrays to save the dice that is being rng'd, and to count how many of a determined dice is at the board
         public int[] playingDiceArr = new int[5] {0,0,0,0,0};
+        //public int rollPlayCount = 0;
+
+        //struct to contain the booleans to lock the scores from the bottom scores
+        public struct LowerScore{
+           public bool threeKind;
+           public bool fourKind;
+           public bool lowStraight;
+           public bool highStraight;
+           public bool chance;
+           public bool fullHouse;
+           public bool yahtzee;
+        }
 
         //BUTTON THAT ROLLS THE DICES
         private void Btn_rollDice_Click(object sender, EventArgs e)
@@ -64,11 +76,15 @@ namespace Yahtzee
                 k++;
             }
            
-            higherScoreChecker();
-            lowerScoreChecker();
+            HigherScoreChecker();
+            LowerScoreChecker();
             TotalScoreFinals();
+
+            //rollPlayCount++;
+            //MessageBox.Show(rollPlayCount.ToString());
         }
       
+
         //checks the dice value with the respective score part (aces, twos etc...)
         public int SimpleDices(int checker)
         {
@@ -78,13 +94,12 @@ namespace Yahtzee
             {
                 if(dice == checker) { counter++; }
             }
-
             return counter;
         }
 
         //verifies the number of dices from Aces to Sixes score and multiplies it by the respective number if more than one dice
         //if the background is yellow, stops the verification, which means the dice was locked by the player
-        public void higherScoreChecker()
+        public void HigherScoreChecker()
         {
             Label[] diceValues = { lbl_aces, lbl_twos, lbl_threes, lbl_fours, lbl_fives, lbl_sixes };
             int i = 1;
@@ -96,86 +111,64 @@ namespace Yahtzee
             }
         }
 
-        //method that verifies the bottom part
-        //trios, four of a kind, sequences, fh, yahtzee, chances
-        public void lowerScoreChecker()
+        //================= ALL METHODS HAVE A BOOLEAN TO CHECK IF THE USER LOCKED OR NOT THE OPTION ==============
+        //================= IF THE OPTION ISN'T LOCKED, THEN THE SCORE CAN BE UPDATED UNTIL LOCKED ===============
+
+        //Method for 3 and 4 of a kind
+        public void ScoreOfAKind()
         {
-            //calls the method that counts the number of dices corresponding to searched dice
-            //diceCount[0] gets the total of number 1 dices, diceCount[1] the number of dices number 2 , etc...
             int[] diceCount = { SimpleDices(1), SimpleDices(2), SimpleDices(3), SimpleDices(4), SimpleDices(5), SimpleDices(6) };
 
-            //gets the value of the actual rolled dices in the board
-            //these values are used to sum their value to the respective category that is picked by the user
-            //EX: three of a kind was picked? sum all dices value
-            int dice1_val = playingDiceArr[0];
-            int dice2_val = playingDiceArr[1];
-            int dice3_val = playingDiceArr[2];
-            int dice4_val = playingDiceArr[3];
-            int dice5_val = playingDiceArr[4];
-
-            //======== Booleans to block the label score =========
-            bool chanceBool = false;
-            bool threeKindBool = false;
-            bool fourKindBool = false;
-            bool fullHouseBool = false;
-            bool lowStraightBool = false;
-            bool highStraightBool = false;
-            bool yahtzeeBool = false;
+            LowerScore bools = new LowerScore();
             
-
-            //========= verifies if the player has locked the label with the respective score =======
-            if (lbl_score3Kind.BackColor == Color.Yellow) { threeKindBool = true; }
-            if (lbl_4KindScore.BackColor == Color.Yellow) { fourKindBool = true; }
-            if (lbl_scoreFH.BackColor == Color.Yellow) { fullHouseBool = true; }
-            if (lbl_scoreLStraight.BackColor == Color.Yellow) { lowStraightBool = true; }
-            if (lbl_scoreHStraight.BackColor == Color.Yellow) { highStraightBool = true; }
-            if (lbl_scoreYat.BackColor == Color.Yellow) { yahtzeeBool = true; }
-            if(lbl_scoreChance.BackColor == Color.Yellow) { chanceBool = true;  }
-
-            //================= chance =================
-            if (!chanceBool)
-            {
-                lbl_scoreChance.Text = Convert.ToString(diceCount[0] + (diceCount[1] * 2) + (diceCount[2] * 3) + (diceCount[3] * 4) + (diceCount[4] * 5) + (diceCount[5] * 6));
-            }            
+            bools.threeKind = false;
+            bools.fourKind = false;
+            
+            if (lbl_score3Kind.BackColor == Color.Yellow) { bools.threeKind = true; }
+            if (lbl_4KindScore.BackColor == Color.Yellow) { bools.fourKind = true; }
 
             //================= three of a kind =================
-            if (!threeKindBool)
+            if (!bools.threeKind)
             {
                 if (diceCount[0] >= 3 || diceCount[1] >= 3 || diceCount[2] >= 3 || diceCount[3] >= 3 || diceCount[4] >= 3 || diceCount[5] >= 3)
                 {
-                    lbl_score3Kind.Text = Convert.ToString(dice1_val + dice2_val + dice3_val + dice4_val + dice5_val);
+                    lbl_score3Kind.Text = Convert.ToString(playingDiceArr[0] + playingDiceArr[1] + playingDiceArr[2] + playingDiceArr[3] + playingDiceArr[4]);
                 }
                 else { lbl_score3Kind.Text = "0"; }
             }
 
             //================= four of a kind =================
-            if (!fourKindBool)
-            {                
+            if (!bools.fourKind)
+            {
                 if (diceCount[0] >= 4 || diceCount[1] >= 4 || diceCount[2] >= 4 || diceCount[3] >= 4 || diceCount[4] >= 4 || diceCount[5] >= 4)
                 {
-                    lbl_4KindScore.Text = Convert.ToString(dice1_val + dice2_val + dice3_val + dice4_val + dice5_val);
+                    lbl_4KindScore.Text = Convert.ToString(playingDiceArr[0] + playingDiceArr[1] + playingDiceArr[2] + playingDiceArr[3] + playingDiceArr[4]);
                 }
                 else { lbl_4KindScore.Text = "0"; }
             }
+        }
+       
+        //STRAIGHT SEQUENCES METHOD
+        public void Sequences()
+        {
+            LowerScore bools = new LowerScore();
 
-            //============full house =================
-            if (!fullHouseBool)
-            {
-                if ((diceCount[0] == 3 || diceCount[1] == 3 || diceCount[2] == 3 || diceCount[3] == 3 || diceCount[4] == 3 || diceCount[5] == 3) &&
-                (diceCount[0] == 2 || diceCount[1] == 2 || diceCount[2] == 2 || diceCount[3] == 2 || diceCount[4] == 2 || diceCount[5] == 2))
-                {
-                    lbl_scoreFH.Text = "25";
-                }
-                else { lbl_scoreFH.Text = "0";}
+            bools.lowStraight = false;
+            bools.highStraight = false;
 
-            }
+            if (lbl_scoreLStraight.BackColor == Color.Yellow) { bools.lowStraight = true; }
+            if (lbl_scoreHStraight.BackColor == Color.Yellow) { bools.highStraight = true; }
+
 
             //================= lower straights =================
-            if (!lowStraightBool)
+            if (!bools.lowStraight)
             {
-                if ((dice1_val == 1 && dice2_val == 2 && dice3_val == 3 && dice4_val == 4) || (dice1_val == 2 && dice2_val == 3 && dice3_val == 4 && dice4_val == 5) ||
-                   (dice1_val == 3 && dice2_val == 4 && dice3_val == 5 && dice4_val == 6) || (dice2_val == 1 && dice3_val == 2 && dice4_val == 3 && dice5_val == 4) ||
-                      (dice2_val == 2 && dice3_val == 3 && dice4_val == 4 && dice5_val == 5) || (dice2_val == 3 && dice3_val == 4 && dice4_val == 5 && dice5_val == 6))
+                if ((playingDiceArr[0].Equals(1) && playingDiceArr[1].Equals(2) && playingDiceArr[2].Equals(3) && playingDiceArr[3].Equals(4))
+                    || (playingDiceArr[0].Equals(2) && playingDiceArr[1].Equals(3) && playingDiceArr[2].Equals(4) && playingDiceArr[3].Equals(5))
+                         || (playingDiceArr[0].Equals(3) && playingDiceArr[1].Equals(4) && playingDiceArr[2].Equals(5) && playingDiceArr[3].Equals(6))
+                             || (playingDiceArr[1].Equals(1) && playingDiceArr[2].Equals(2) && playingDiceArr[3].Equals(3) && playingDiceArr[4].Equals(4))
+                                || (playingDiceArr[1].Equals(2) && playingDiceArr[2].Equals(3) && playingDiceArr[3].Equals(4) && playingDiceArr[4].Equals(5))
+                                    || (playingDiceArr[1].Equals(3) && playingDiceArr[2].Equals(4) && playingDiceArr[3].Equals(5) && playingDiceArr[4].Equals(6)))
                 {
                     lbl_scoreLStraight.Text = "30";
                 }
@@ -183,63 +176,102 @@ namespace Yahtzee
             }
 
             //================= large straight =================
-            if (!highStraightBool)
+            if (!bools.highStraight)
             {
-                if ((dice1_val == 1 && dice2_val == 2 && dice3_val == 3 && dice4_val == 4 && dice5_val == 5) ||
-                                    dice1_val == 2 && dice2_val == 3 && dice3_val == 4 && dice4_val == 5 && dice5_val == 6)
+                if ((playingDiceArr[0].Equals(1) && playingDiceArr[1].Equals(2) && playingDiceArr[2].Equals(3) && playingDiceArr[3].Equals(4) && playingDiceArr[4].Equals(5))
+                     || playingDiceArr[0].Equals(2) && playingDiceArr[1].Equals(3) && playingDiceArr[2].Equals(4) && playingDiceArr[3].Equals(5) && playingDiceArr[4].Equals(6))
                 {
                     lbl_scoreHStraight.Text = "40";
                 }
                 else { lbl_scoreHStraight.Text = "0"; }
             }
+        }
+
+        //method that verifies the bottom score
+        //trios, four of a kind, sequences, fh, yahtzee, chances
+        public void LowerScoreChecker()
+        {
+            LowerScore bools = new LowerScore();
+            bools.fullHouse = false;
+            bools.yahtzee = false;
+            bools.chance = false;
+
+            //calls the method that counts the number of dices corresponding to searched dice
+            //diceCount[0] gets the total of number 1 dices, diceCount[1] the number of dices number 2 , etc...
+            int[] diceCount = { SimpleDices(1), SimpleDices(2), SimpleDices(3), SimpleDices(4), SimpleDices(5), SimpleDices(6) };
+
+            //======== Booleans to block the label score =========            
+            if (lbl_scoreFH.BackColor == Color.Yellow) { bools.fullHouse = true; }            
+            if (lbl_scoreYat.BackColor == Color.Yellow) { bools.yahtzee = true; }
+            if(lbl_scoreChance.BackColor == Color.Yellow) { bools.chance = true;  }
+
+            //================= chance =================
+            if (!bools.chance)
+            {
+                lbl_scoreChance.Text = Convert.ToString(diceCount[0] + (diceCount[1] * 2) + (diceCount[2] * 3) + (diceCount[3] * 4) + (diceCount[4] * 5) + (diceCount[5] * 6));
+            }        
+
+            //============full house =================
+            if (!bools.fullHouse)
+            {
+                if ((diceCount[0].Equals(3) || diceCount[1].Equals(3) || diceCount[2].Equals(3) || diceCount[3].Equals(3) || diceCount[4].Equals(3) || diceCount[5].Equals(3)) 
+                    && (diceCount[0].Equals(2) || diceCount[1].Equals(2) || diceCount[2].Equals(2) || diceCount[3].Equals(2) || diceCount[4].Equals(2) || diceCount[5].Equals(2)))
+                {
+                    lbl_scoreFH.Text = "25";
+                }
+                else { lbl_scoreFH.Text = "0";}
+            }
+
+            ScoreOfAKind();
+            Sequences();            
 
             //================= yahtzee =================
-            if(!yahtzeeBool)
+            if(!bools.yahtzee)
             {
-                if (diceCount[0] == 5 || diceCount[1] == 5 || diceCount[2] == 5 || diceCount[3] == 5 || diceCount[4] == 5 || diceCount[5] == 5)
-                {
-                    lbl_scoreYat.Text = "50";
-                }
-                else { lbl_scoreYat.Text = "0"; }
-            }
-           
+                foreach(int dice in diceCount)
+                { 
+                    if(dice.Equals(5)) {
+                        lbl_scoreYat.Text = "50";
+                        break;
+                    }
+                     else { lbl_scoreYat.Text = "0"; }
+                }               
+            }           
         }
 
         // ================= SCORES =======================
         public void TotalScoreFinals()
         {
-            //======== int conversions for final score ======== 
-            int acesScore = Convert.ToInt32(lbl_aces.Text);
-            int twosScore = Convert.ToInt32(lbl_twos.Text);
-            int threeScore = Convert.ToInt32(lbl_threes.Text);
-            int fourScore = Convert.ToInt32(lbl_fours.Text);
-            int fiveScore = Convert.ToInt32(lbl_fives.Text);
-            int sixesScore = Convert.ToInt32(lbl_sixes.Text);
+            Label[] upperScore = { lbl_aces, lbl_twos, lbl_threes, lbl_fours, lbl_fives, lbl_sixes };
+            Label[] bottomScore = { lbl_scoreBonus , lbl_score3Kind, lbl_4KindScore, lbl_scoreLStraight, lbl_scoreHStraight, lbl_scoreChance, lbl_scoreYat };
 
-            // ======= BONUS =======
-            if (acesScore + twosScore + threeScore + fourScore + fiveScore + sixesScore >= 63)
+            // ======= DEFINING BONUS =======
+            int sumUpperScore = 0;
+            foreach(Label upper in upperScore)
+            {
+                sumUpperScore += Convert.ToInt32(upper.Text);
+            }
+           
+            // if uppersum is higher than 63, player gets 35 extra bonus as the rules state
+            if (sumUpperScore >= 63)
             {
                 lbl_scoreBonus.Text = "35";
             }
-            
-            int bonus = Convert.ToInt32(lbl_scoreBonus.Text);
-            int threeKind = Convert.ToInt32(lbl_score3Kind.Text);
-            int fourKind = Convert.ToInt32(lbl_4KindScore.Text);
-            int low_straight = Convert.ToInt32(lbl_scoreLStraight.Text);
-            int high_straight = Convert.ToInt32(lbl_scoreHStraight.Text);
-            int chance = Convert.ToInt32(lbl_scoreChance.Text);
-            int yahtzee_score = Convert.ToInt32(lbl_scoreYat.Text);
+
+            // ======= BOTTOM SUM ======
+            int sumBottomScore = 0;
+            foreach(Label bottom in bottomScore)
+            {
+                sumBottomScore += Convert.ToInt32(bottom.Text);
+            }
 
             //========  total score ======== 
-            int grandTotal = acesScore + twosScore + threeScore + fourScore + fiveScore + sixesScore + bonus + threeKind + fourKind
-                           + low_straight + high_straight + chance + yahtzee_score;
-
-            //========  final score  ========  
+            int grandTotal = sumUpperScore + sumBottomScore;
             lbl_finalScore.Text = Convert.ToString(grandTotal);
         }
 
         // ----------------- LABEL CLICK EVENTS -----------------
-      
+
         public void label_click_aces(object sender, EventArgs e)
         {
             Label click_aces = sender as Label;
