@@ -48,9 +48,13 @@
             this.lbl_totalScore = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dicePlay_ctrl = new System.Windows.Forms.TableLayoutPanel();
+            this.pic_roll5 = new System.Windows.Forms.PictureBox();
             this.lbl_d5Txt = new System.Windows.Forms.Label();
+            this.pic_roll4 = new System.Windows.Forms.PictureBox();
             this.lbl_d2Txt = new System.Windows.Forms.Label();
+            this.pic_roll3 = new System.Windows.Forms.PictureBox();
             this.lbl_d4Txt = new System.Windows.Forms.Label();
+            this.pic_roll2 = new System.Windows.Forms.PictureBox();
             this.lbl_d3Txt = new System.Windows.Forms.Label();
             this.chk_holdD1 = new System.Windows.Forms.CheckBox();
             this.chk_holdD2 = new System.Windows.Forms.CheckBox();
@@ -58,6 +62,7 @@
             this.chk_holdD4 = new System.Windows.Forms.CheckBox();
             this.chk_holdD5 = new System.Windows.Forms.CheckBox();
             this.lbl_d1Txt = new System.Windows.Forms.Label();
+            this.pic_roll1 = new System.Windows.Forms.PictureBox();
             this.lbl_rollsLeft = new System.Windows.Forms.Label();
             this.picBox_d3 = new System.Windows.Forms.PictureBox();
             this.picBox_d2 = new System.Windows.Forms.PictureBox();
@@ -78,13 +83,14 @@
             this.HIgher_Score = new System.Windows.Forms.GroupBox();
             this.NewGameStrip = new System.Windows.Forms.MenuStrip();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pic_roll1 = new System.Windows.Forms.PictureBox();
-            this.pic_roll2 = new System.Windows.Forms.PictureBox();
-            this.pic_roll3 = new System.Windows.Forms.PictureBox();
-            this.pic_roll4 = new System.Windows.Forms.PictureBox();
-            this.pic_roll5 = new System.Windows.Forms.PictureBox();
+            this.lbl_numberRolls = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.dicePlay_ctrl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_roll5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_roll4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_roll3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_roll2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_roll1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d4)).BeginInit();
@@ -95,19 +101,14 @@
             this.LowerScoreGroup.SuspendLayout();
             this.HIgher_Score.SuspendLayout();
             this.NewGameStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_roll1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_roll2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_roll3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_roll4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_roll5)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_rollDice
             // 
             this.btn_rollDice.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_rollDice.Location = new System.Drawing.Point(34, 417);
+            this.btn_rollDice.Location = new System.Drawing.Point(80, 438);
             this.btn_rollDice.Name = "btn_rollDice";
-            this.btn_rollDice.Size = new System.Drawing.Size(456, 60);
+            this.btn_rollDice.Size = new System.Drawing.Size(367, 60);
             this.btn_rollDice.TabIndex = 0;
             this.btn_rollDice.Text = "Roll Dice";
             this.btn_rollDice.UseVisualStyleBackColor = true;
@@ -415,6 +416,17 @@
             this.dicePlay_ctrl.Size = new System.Drawing.Size(447, 283);
             this.dicePlay_ctrl.TabIndex = 11;
             // 
+            // pic_roll5
+            // 
+            this.pic_roll5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pic_roll5.Image = global::Yahtzee.Properties.Resources.d6;
+            this.pic_roll5.Location = new System.Drawing.Point(84, 227);
+            this.pic_roll5.Name = "pic_roll5";
+            this.pic_roll5.Size = new System.Drawing.Size(242, 50);
+            this.pic_roll5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_roll5.TabIndex = 10;
+            this.pic_roll5.TabStop = false;
+            // 
             // lbl_d5Txt
             // 
             this.lbl_d5Txt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -427,6 +439,17 @@
             this.lbl_d5Txt.TabIndex = 4;
             this.lbl_d5Txt.Text = "dice 5: ";
             this.lbl_d5Txt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pic_roll4
+            // 
+            this.pic_roll4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pic_roll4.Image = global::Yahtzee.Properties.Resources.d6;
+            this.pic_roll4.Location = new System.Drawing.Point(84, 171);
+            this.pic_roll4.Name = "pic_roll4";
+            this.pic_roll4.Size = new System.Drawing.Size(242, 50);
+            this.pic_roll4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_roll4.TabIndex = 9;
+            this.pic_roll4.TabStop = false;
             // 
             // lbl_d2Txt
             // 
@@ -441,6 +464,17 @@
             this.lbl_d2Txt.Text = "dice 2: ";
             this.lbl_d2Txt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pic_roll3
+            // 
+            this.pic_roll3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pic_roll3.Image = global::Yahtzee.Properties.Resources.d6;
+            this.pic_roll3.Location = new System.Drawing.Point(84, 115);
+            this.pic_roll3.Name = "pic_roll3";
+            this.pic_roll3.Size = new System.Drawing.Size(242, 50);
+            this.pic_roll3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_roll3.TabIndex = 8;
+            this.pic_roll3.TabStop = false;
+            // 
             // lbl_d4Txt
             // 
             this.lbl_d4Txt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -453,6 +487,17 @@
             this.lbl_d4Txt.TabIndex = 3;
             this.lbl_d4Txt.Text = "dice 4: ";
             this.lbl_d4Txt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pic_roll2
+            // 
+            this.pic_roll2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pic_roll2.Image = global::Yahtzee.Properties.Resources.d6;
+            this.pic_roll2.Location = new System.Drawing.Point(84, 59);
+            this.pic_roll2.Name = "pic_roll2";
+            this.pic_roll2.Size = new System.Drawing.Size(242, 50);
+            this.pic_roll2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_roll2.TabIndex = 7;
+            this.pic_roll2.TabStop = false;
             // 
             // lbl_d3Txt
             // 
@@ -550,16 +595,27 @@
             this.lbl_d1Txt.Text = "dice 1: ";
             this.lbl_d1Txt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pic_roll1
+            // 
+            this.pic_roll1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pic_roll1.Image = global::Yahtzee.Properties.Resources.d6;
+            this.pic_roll1.Location = new System.Drawing.Point(84, 3);
+            this.pic_roll1.Name = "pic_roll1";
+            this.pic_roll1.Size = new System.Drawing.Size(242, 50);
+            this.pic_roll1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_roll1.TabIndex = 6;
+            this.pic_roll1.TabStop = false;
+            // 
             // lbl_rollsLeft
             // 
             this.lbl_rollsLeft.AutoSize = true;
             this.lbl_rollsLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_rollsLeft.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbl_rollsLeft.Location = new System.Drawing.Point(39, 382);
+            this.lbl_rollsLeft.Location = new System.Drawing.Point(115, 387);
             this.lbl_rollsLeft.Name = "lbl_rollsLeft";
-            this.lbl_rollsLeft.Size = new System.Drawing.Size(189, 32);
+            this.lbl_rollsLeft.Size = new System.Drawing.Size(161, 32);
             this.lbl_rollsLeft.TabIndex = 4;
-            this.lbl_rollsLeft.Text = "Rolls Left : X";
+            this.lbl_rollsLeft.Text = "Rolls Left :";
             // 
             // picBox_d3
             // 
@@ -836,60 +892,20 @@
             this.newGameToolStripMenuItem.Size = new System.Drawing.Size(122, 29);
             this.newGameToolStripMenuItem.Text = "New Game";
             // 
-            // pic_roll1
+            // lbl_numberRolls
             // 
-            this.pic_roll1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pic_roll1.Image = global::Yahtzee.Properties.Resources.d6;
-            this.pic_roll1.Location = new System.Drawing.Point(84, 3);
-            this.pic_roll1.Name = "pic_roll1";
-            this.pic_roll1.Size = new System.Drawing.Size(242, 50);
-            this.pic_roll1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_roll1.TabIndex = 6;
-            this.pic_roll1.TabStop = false;
-            // 
-            // pic_roll2
-            // 
-            this.pic_roll2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pic_roll2.Image = global::Yahtzee.Properties.Resources.d6;
-            this.pic_roll2.Location = new System.Drawing.Point(84, 59);
-            this.pic_roll2.Name = "pic_roll2";
-            this.pic_roll2.Size = new System.Drawing.Size(242, 50);
-            this.pic_roll2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_roll2.TabIndex = 7;
-            this.pic_roll2.TabStop = false;
-            // 
-            // pic_roll3
-            // 
-            this.pic_roll3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pic_roll3.Image = global::Yahtzee.Properties.Resources.d6;
-            this.pic_roll3.Location = new System.Drawing.Point(84, 115);
-            this.pic_roll3.Name = "pic_roll3";
-            this.pic_roll3.Size = new System.Drawing.Size(242, 50);
-            this.pic_roll3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_roll3.TabIndex = 8;
-            this.pic_roll3.TabStop = false;
-            // 
-            // pic_roll4
-            // 
-            this.pic_roll4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pic_roll4.Image = global::Yahtzee.Properties.Resources.d6;
-            this.pic_roll4.Location = new System.Drawing.Point(84, 171);
-            this.pic_roll4.Name = "pic_roll4";
-            this.pic_roll4.Size = new System.Drawing.Size(242, 50);
-            this.pic_roll4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_roll4.TabIndex = 9;
-            this.pic_roll4.TabStop = false;
-            // 
-            // pic_roll5
-            // 
-            this.pic_roll5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pic_roll5.Image = global::Yahtzee.Properties.Resources.d6;
-            this.pic_roll5.Location = new System.Drawing.Point(84, 227);
-            this.pic_roll5.Name = "pic_roll5";
-            this.pic_roll5.Size = new System.Drawing.Size(242, 50);
-            this.pic_roll5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_roll5.TabIndex = 10;
-            this.pic_roll5.TabStop = false;
+            this.lbl_numberRolls.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_numberRolls.AutoSize = true;
+            this.lbl_numberRolls.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_numberRolls.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbl_numberRolls.Location = new System.Drawing.Point(333, 385);
+            this.lbl_numberRolls.Name = "lbl_numberRolls";
+            this.lbl_numberRolls.Size = new System.Drawing.Size(35, 38);
+            this.lbl_numberRolls.TabIndex = 16;
+            this.lbl_numberRolls.Text = "0";
+            this.lbl_numberRolls.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -897,6 +913,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGreen;
             this.ClientSize = new System.Drawing.Size(1330, 529);
+            this.Controls.Add(this.lbl_numberRolls);
             this.Controls.Add(this.lbl_rollsLeft);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.scoreBox);
@@ -909,6 +926,11 @@
             this.groupBox1.ResumeLayout(false);
             this.dicePlay_ctrl.ResumeLayout(false);
             this.dicePlay_ctrl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_roll5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_roll4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_roll3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_roll2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_roll1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_d4)).EndInit();
@@ -922,11 +944,6 @@
             this.HIgher_Score.PerformLayout();
             this.NewGameStrip.ResumeLayout(false);
             this.NewGameStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_roll1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_roll2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_roll3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_roll4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_roll5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -988,6 +1005,7 @@
         private System.Windows.Forms.PictureBox pic_roll3;
         private System.Windows.Forms.PictureBox pic_roll4;
         private System.Windows.Forms.PictureBox pic_roll5;
+        private System.Windows.Forms.Label lbl_numberRolls;
     }
 }
 
