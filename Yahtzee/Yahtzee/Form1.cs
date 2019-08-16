@@ -3,11 +3,9 @@
 //started at 7 july 2019
 
 /*TODO LIST:
- * Try to make an arrayList and separate the code in classes
  * WHEN USER LOCKS AN OPTION, MAKE THE DICE RANDOMLY GETS NEW VALUES, OR LOCK THE OPTION TO NOT LOCK MORE THAN ONE AT ONCE
  * NEW GAME BUTTON
  * ===========================
- * TERMINATING THE GAME AND RETURNING THE FINAL SCORE AS POPUP WHEN ALL 13 OPTIONS ARE USED
  * DESIGN MISC.
  * BOT PLAYER || 2 PLAYERS
  * BUG FIXING
@@ -32,23 +30,11 @@ namespace Yahtzee
         //Public arrays to save the dice that is being rng'd, and to count how many of a determined dice is at the board
         public int[] playingDiceArr = new int[5] {0,0,0,0,0};
         public int rollPlayCount = 0, globalCount = -1, globalVerifier = 0;
-        LowerScore bools = new LowerScore();
-
-        //struct to contain the booleans to lock the scores from the bottom scores
-        public struct LowerScore{
-           public bool threeKind;
-           public bool fourKind;
-           public bool lowStraight;
-           public bool highStraight;
-           public bool chance;
-           public bool fullHouse;
-           public bool yahtzee;
-        }
-
+ 
         //BUTTON THAT ROLLS THE DICES
         private void Btn_rollDice_Click(object sender, EventArgs e)
         {
-            Rng generator = new Rng();
+            GameManagement gameOptions = new GameManagement();
             CheckBox[] playerPick = { chk_holdD1, chk_holdD2, chk_holdD3, chk_holdD4, chk_holdD5 };
             PictureBox[] playingDicePictures = { pic_roll1 , pic_roll2, pic_roll3, pic_roll4, pic_roll5};
             Image[] images = { Properties.Resources.d1, Properties.Resources.d2, Properties.Resources.d3, Properties.Resources.d4, Properties.Resources.d5, Properties.Resources.d6 };
@@ -61,29 +47,9 @@ namespace Yahtzee
             }
 
             if (this.rollPlayCount < 3)  {
-                int i = 0; //iterator
 
-                //rng to get the dices a new value if the user hadn't locked any
-                foreach (CheckBox box in playerPick)
-                {
-                    if (box.Checked != true)
-                    {
-                        playingDiceArr[i] = generator.DiceRng();
-                    }
-                    i++;
-                }
-
-                //loop to change the dice picture box to the img dice corresponding to the value that was given by the rng
-
-                int k = 0; //iterator 
-                foreach (int dice in playingDiceArr)
-                {
-                    for (int j = 1; j <= 6; j++)
-                    {
-                        if (dice.Equals(j)) { playingDicePictures[k].Image = images[j - 1]; }
-                    }
-                    k++;
-                }
+                gameOptions.GenerateDices(playerPick, playingDiceArr);
+                gameOptions.ChangeDicePicture(playingDiceArr, playingDicePictures, images);
 
                 this.rollPlayCount++;
                 lbl_numberRolls.Text = rollPlayCount.ToString();
@@ -93,8 +59,7 @@ namespace Yahtzee
 
             HigherScoreChecker();
             LowerScoreChecker();
-            TotalScoreFinals();
-            
+            TotalScoreFinals();            
         }
 
         public void EndOfGame()
@@ -123,145 +88,32 @@ namespace Yahtzee
         public void HigherScoreChecker()
         {
             Label[] diceValues = { lbl_aces, lbl_twos, lbl_threes, lbl_fours, lbl_fives, lbl_sixes };
+
             int i = 1;
 
-            foreach(Label diceScore in diceValues)
+            foreach (Label diceScore in diceValues)
             {
-                if(diceScore.BackColor != Color.Yellow) {
+                if (diceScore.BackColor != Color.Yellow)
+                {
                     diceScore.Text = Convert.ToString(SimpleDices(i) * i);
                 }
                 i++;
             }
         }
 
-        //================= ALL METHODS HAVE A BOOLEAN TO CHECK IF THE USER LOCKED OR NOT THE OPTION ==============
-        //================= IF THE OPTION ISN'T LOCKED, THEN THE SCORE CAN BE UPDATED UNTIL LOCKED ===============
-        // methods for score and score!
-
-        public void ScoreOfAKind()
-        {
-            int[] diceCount = { SimpleDices(1), SimpleDices(2), SimpleDices(3), SimpleDices(4), SimpleDices(5), SimpleDices(6) };
-            
-            this.bools.threeKind = false;
-            this.bools.fourKind = false;
-            
-            if (lbl_score3Kind.BackColor == Color.Yellow) { this.bools.threeKind = true; }
-            if (lbl_4KindScore.BackColor == Color.Yellow) { this.bools.fourKind = true; }
-
-            //================= three of a kind =================
-            if (!this.bools.threeKind)
-            {
-                if (diceCount[0] >= 3 || diceCount[1] >= 3 || diceCount[2] >= 3 || diceCount[3] >= 3 || diceCount[4] >= 3 || diceCount[5] >= 3)
-                {
-                    lbl_score3Kind.Text = Convert.ToString(playingDiceArr[0] + playingDiceArr[1] + playingDiceArr[2] + playingDiceArr[3] + playingDiceArr[4]);
-                }
-                else { lbl_score3Kind.Text = "0"; }
-            }
-
-            //================= four of a kind =================
-            if (!this.bools.fourKind)
-            {
-                if (diceCount[0] >= 4 || diceCount[1] >= 4 || diceCount[2] >= 4 || diceCount[3] >= 4 || diceCount[4] >= 4 || diceCount[5] >= 4)
-                {
-                    lbl_4KindScore.Text = Convert.ToString(playingDiceArr[0] + playingDiceArr[1] + playingDiceArr[2] + playingDiceArr[3] + playingDiceArr[4]);
-                }
-                else { lbl_4KindScore.Text = "0"; }
-            }
-        }
-       
-        public void Sequences()
-        {
-            this.bools.lowStraight = false;
-            this.bools.highStraight = false;
-
-            if (lbl_scoreLStraight.BackColor == Color.Yellow) { this.bools.lowStraight = true; }
-            if (lbl_scoreHStraight.BackColor == Color.Yellow) { this.bools.highStraight = true; }
-
-
-            //================= lower straights =================
-            if (!this.bools.lowStraight)
-            {
-                if ((playingDiceArr[0].Equals(1) && playingDiceArr[1].Equals(2) && playingDiceArr[2].Equals(3) && playingDiceArr[3].Equals(4))
-                    || (playingDiceArr[0].Equals(2) && playingDiceArr[1].Equals(3) && playingDiceArr[2].Equals(4) && playingDiceArr[3].Equals(5))
-                         || (playingDiceArr[0].Equals(3) && playingDiceArr[1].Equals(4) && playingDiceArr[2].Equals(5) && playingDiceArr[3].Equals(6))
-                             || (playingDiceArr[1].Equals(1) && playingDiceArr[2].Equals(2) && playingDiceArr[3].Equals(3) && playingDiceArr[4].Equals(4))
-                                || (playingDiceArr[1].Equals(2) && playingDiceArr[2].Equals(3) && playingDiceArr[3].Equals(4) && playingDiceArr[4].Equals(5))
-                                    || (playingDiceArr[1].Equals(3) && playingDiceArr[2].Equals(4) && playingDiceArr[3].Equals(5) && playingDiceArr[4].Equals(6)))
-                {
-                    lbl_scoreLStraight.Text = "30";
-                }
-                else { lbl_scoreLStraight.Text = "0"; }
-            }
-
-            //================= large straight =================
-            if (!this.bools.highStraight)
-            {
-                if ((playingDiceArr[0].Equals(1) && playingDiceArr[1].Equals(2) && playingDiceArr[2].Equals(3) && playingDiceArr[3].Equals(4) && playingDiceArr[4].Equals(5))
-                     || playingDiceArr[0].Equals(2) && playingDiceArr[1].Equals(3) && playingDiceArr[2].Equals(4) && playingDiceArr[3].Equals(5) && playingDiceArr[4].Equals(6))
-                {
-                    lbl_scoreHStraight.Text = "40";
-                }
-                else { lbl_scoreHStraight.Text = "0"; }
-            }
-        }
-
-        public void Chance()
-        {
-            this.bools.chance = false;
-
-            if (lbl_scoreChance.BackColor == Color.Yellow) { this.bools.chance = true; }            
-
-            if (!this.bools.chance)
-            {
-                lbl_scoreChance.Text = Convert.ToString(SimpleDices(1) + (SimpleDices(2) * 2) + (SimpleDices(3) * 3) + (SimpleDices(4) * 4) + (SimpleDices(5) * 5) + (SimpleDices(6) * 6));
-            }
-        }
-
-        public void FullHouse()
-        {
-            this.bools.fullHouse = false;
-            if (lbl_scoreFH.BackColor == Color.Yellow) { this.bools.fullHouse = true; }
-
-            if (!this.bools.fullHouse)
-            {
-                if ((SimpleDices(1).Equals(3) || SimpleDices(2).Equals(3) || SimpleDices(3).Equals(3) || SimpleDices(4).Equals(3) || SimpleDices(5).Equals(3) || SimpleDices(6).Equals(3))
-                    && (SimpleDices(1).Equals(2) || SimpleDices(2).Equals(2) || SimpleDices(3).Equals(2) || SimpleDices(4).Equals(2) || SimpleDices(5).Equals(2) || SimpleDices(6).Equals(2)))
-                {
-                    lbl_scoreFH.Text = "25";
-                }
-                else { lbl_scoreFH.Text = "0"; }
-            }
-        }
-
-        public void Yahtzee()
-        {
-            this.bools.yahtzee = false;
-            
-            if (lbl_scoreYat.BackColor == Color.Yellow) { this.bools.yahtzee = true; }
-            int[] diceCount = { SimpleDices(1), SimpleDices(2), SimpleDices(3), SimpleDices(4), SimpleDices(5), SimpleDices(6) };
-
-            //================= yahtzee =================
-            if (!this.bools.yahtzee)
-            {
-                foreach (int dice in diceCount)
-                {
-                    if (dice.Equals(5))
-                    {
-                        lbl_scoreYat.Text = "50";
-                        break;
-                    }
-                    else { lbl_scoreYat.Text = "0"; }
-                }
-            }
-        }
-
         public void LowerScoreChecker()
         {
-            Sequences();
-            FullHouse();
-            ScoreOfAKind();
-            Chance();
-            Yahtzee();
+            int[] diceCount = { SimpleDices(1), SimpleDices(2), SimpleDices(3), SimpleDices(4), SimpleDices(5), SimpleDices(6) };
+
+            GameManagement gameManagement = new GameManagement();
+
+            gameManagement.ThreeOfAKind(diceCount, lbl_score3Kind, playingDiceArr);
+            gameManagement.FourOfAKind(diceCount, lbl_4KindScore, playingDiceArr);
+            gameManagement.FullHouse(lbl_scoreFH, diceCount);
+            gameManagement.LowStraight(lbl_scoreLStraight, playingDiceArr);
+            gameManagement.HighStraight(lbl_scoreHStraight, playingDiceArr);
+            gameManagement.Chance(lbl_scoreChance, diceCount);
+            gameManagement.Yahtzee(lbl_scoreYat, diceCount);
         }
 
         public void TotalScoreFinals()
