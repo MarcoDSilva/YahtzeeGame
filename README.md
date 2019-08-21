@@ -6,8 +6,16 @@ Also a way to make a game before trying to go for Unity Engine.
 
 ## **BETA RELEASE**
 
-> to be announced
+> Version 1.0.0 released at 22 August 2019.
 
 #### Version Notes:
 
-> to be updated
+> Game is playable by one player
+
+> New Game button functionality added
+
+> About button added
+
+> Code refactored
+
+> Some bugs to be fixed, if player locks more than one label option too fast, game may get stuck
