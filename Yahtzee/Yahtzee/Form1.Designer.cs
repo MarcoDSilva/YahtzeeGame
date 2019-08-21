@@ -84,6 +84,8 @@
             this.NewGameStrip = new System.Windows.Forms.MenuStrip();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbl_numberRolls = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.AboutGameStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.dicePlay_ctrl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_roll5)).BeginInit();
@@ -101,6 +103,7 @@
             this.LowerScoreGroup.SuspendLayout();
             this.HIgher_Score.SuspendLayout();
             this.NewGameStrip.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_rollDice
@@ -891,6 +894,7 @@
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
             this.newGameToolStripMenuItem.Size = new System.Drawing.Size(122, 29);
             this.newGameToolStripMenuItem.Text = "New Game";
+            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameToolStripMenuItem_Click);
             // 
             // lbl_numberRolls
             // 
@@ -907,12 +911,35 @@
             this.lbl_numberRolls.Text = "0";
             this.lbl_numberRolls.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.ForestGreen;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AboutGameStrip});
+            this.menuStrip1.Location = new System.Drawing.Point(148, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(240, 33);
+            this.menuStrip1.TabIndex = 17;
+            this.menuStrip1.Text = "New_Game";
+            // 
+            // AboutGameStrip
+            // 
+            this.AboutGameStrip.ForeColor = System.Drawing.SystemColors.Control;
+            this.AboutGameStrip.Name = "AboutGameStrip";
+            this.AboutGameStrip.Size = new System.Drawing.Size(82, 29);
+            this.AboutGameStrip.Text = "About";
+            this.AboutGameStrip.Click += new System.EventHandler(this.AboutGameStrip_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGreen;
             this.ClientSize = new System.Drawing.Size(1330, 529);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.lbl_numberRolls);
             this.Controls.Add(this.lbl_rollsLeft);
             this.Controls.Add(this.groupBox1);
@@ -944,6 +971,8 @@
             this.HIgher_Score.PerformLayout();
             this.NewGameStrip.ResumeLayout(false);
             this.NewGameStrip.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1006,6 +1035,8 @@
         private System.Windows.Forms.PictureBox pic_roll4;
         private System.Windows.Forms.PictureBox pic_roll5;
         private System.Windows.Forms.Label lbl_numberRolls;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem AboutGameStrip;
     }
 }
 

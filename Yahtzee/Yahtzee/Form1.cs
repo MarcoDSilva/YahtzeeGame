@@ -3,12 +3,11 @@
 //started at 7 july 2019
 
 /*TODO LIST:
- * WHEN USER LOCKS AN OPTION, MAKE THE DICE RANDOMLY GETS NEW VALUES, OR LOCK THE OPTION TO NOT LOCK MORE THAN ONE AT ONCE
- * NEW GAME BUTTON
- * ===========================
- * DESIGN MISC.
+ * ADD A BUTTON WITH THE RULES
+ * DESIGN MISC - BUTTONS AND MENU STRIP
+ * POTENCIAL CODE REFACTOR IN SOME METHODS(?)
  * BOT PLAYER || 2 PLAYERS
- * BUG FIXING
+ * BUG FIXING - sometimes locking more than one option in a row gets the game stuck in the counter of 3
  * IMPORTING TO UNITY AND TRY TO MAKE IT 3D(?) 
  * OTHERS
 */
@@ -33,44 +32,61 @@ namespace Yahtzee
  
         //BUTTON THAT ROLLS THE DICES
         private void Btn_rollDice_Click(object sender, EventArgs e)
-        {
-            GameManagement gameOptions = new GameManagement();
+        {           
             CheckBox[] playerPick = { chk_holdD1, chk_holdD2, chk_holdD3, chk_holdD4, chk_holdD5 };
             PictureBox[] playingDicePictures = { pic_roll1 , pic_roll2, pic_roll3, pic_roll4, pic_roll5};
             Image[] images = { Properties.Resources.d1, Properties.Resources.d2, Properties.Resources.d3, Properties.Resources.d4, Properties.Resources.d5, Properties.Resources.d6 };
 
-            EndOfGame();
+            GameEndVerifier();
+            GameCounterReset(playerPick);
+            GameLogic(playerPick, playingDicePictures, images);
+            Scores();           
+        }
 
-            if (this.globalCount.Equals(this.globalVerifier)) {
-                this.rollPlayCount = 0;
-                this.globalVerifier++;
-            }
+        //game logic that changes the dices, images, and verifies the number of plays
+        public void GameLogic(CheckBox[] box, PictureBox[] pics, Image[] images)
+        {
+            GameManagement gameOptions = new GameManagement();
+            if (this.rollPlayCount < 3)
+            {
 
-            if (this.rollPlayCount < 3)  {
-
-                gameOptions.GenerateDices(playerPick, playingDiceArr);
-                gameOptions.ChangeDicePicture(playingDiceArr, playingDicePictures, images);
+                gameOptions.GenerateDices(box, playingDiceArr);
+                gameOptions.ChangeDicePicture(playingDiceArr, pics, images);
 
                 this.rollPlayCount++;
                 lbl_numberRolls.Text = rollPlayCount.ToString();
-            } else {
+            }
+            else
+            {
                 MessageBox.Show("Please lock a dice, you used your 3 rolls");
             }
-
-            HigherScoreChecker();
-            LowerScoreChecker();
-            TotalScoreFinals();            
         }
 
-        public void EndOfGame()
+        //resets the play counter and the checkboxes when the player selects one option to lock
+        public void GameCounterReset(CheckBox[] boxes)
         {
-            if(this.globalCount.Equals(12))
+            if (this.globalCount.Equals(this.globalVerifier))
+            {
+                this.rollPlayCount = 0;
+                this.globalVerifier++;
+
+                foreach (CheckBox player in boxes)
+                {
+                    player.Checked = false;
+                }
+            }
+        }
+
+        //terminates the game when all plays are completed
+        public void GameEndVerifier()
+        {
+            if (this.globalCount.Equals(12))
             {
                 MessageBox.Show("You finished the game! Your final score is: " + lbl_finalScore.Text);
                 btn_rollDice.Enabled = false;
             }
         }
-      
+
         //checks the dice value with the respective score part (aces, twos etc...)
         public int SimpleDices(int checker)
         {
@@ -83,6 +99,14 @@ namespace Yahtzee
             return counter;
         }
 
+        //method that calls the methods that update the scores
+        public void Scores()
+        {
+            HigherScoreChecker();
+            LowerScoreChecker();
+            TotalScoreFinals();
+        }
+
         //verifies the number of dices from Aces to Sixes score and multiplies it by the respective number if more than one dice
         //if the background is yellow, stops the verification, which means the dice was locked by the player
         public void HigherScoreChecker()
@@ -91,10 +115,8 @@ namespace Yahtzee
 
             int i = 1;
 
-            foreach (Label diceScore in diceValues)
-            {
-                if (diceScore.BackColor != Color.Yellow)
-                {
+            foreach (Label diceScore in diceValues)  {
+                if (diceScore.BackColor != Color.Yellow) {
                     diceScore.Text = Convert.ToString(SimpleDices(i) * i);
                 }
                 i++;
@@ -146,13 +168,54 @@ namespace Yahtzee
             lbl_finalScore.Text = Convert.ToString(grandTotal);
         }
 
-        // ----------------- LABEL CLICK EVENTS -----------------
-        public void label_click_aces(object sender, EventArgs e) {
+        //RESET BUTTON
+        private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheckBox[] playerPick = { chk_holdD1, chk_holdD2, chk_holdD3, chk_holdD4, chk_holdD5 };
+            Label[] upperScore = { lbl_aces, lbl_twos, lbl_threes, lbl_fours, lbl_fives, lbl_sixes };
+            Label[] bottomScore = { lbl_scoreBonus, lbl_score3Kind, lbl_4KindScore, lbl_scoreLStraight, lbl_scoreHStraight, lbl_scoreChance, lbl_scoreYat, lbl_finalScore };
+
+            //resets the counter and dices variables
+            this.playingDiceArr = new int[5] { 0, 0, 0, 0, 0 };
+            this.rollPlayCount = 0;
+            this.globalCount = -1;
+            this.globalVerifier = 0;
+
+            foreach(CheckBox player in playerPick){
+                player.Checked = false;
+            }
+
+            foreach(Label upper in upperScore){
+                upper.Text = "0";
+                upper.BackColor = Color.Transparent;
+                upper.Enabled = true;
+            }
+
+            foreach (Label bottom in bottomScore)
+            {
+                bottom.Text = "0";
+                bottom.BackColor = Color.Transparent;
+                bottom.Enabled = true;
+            }
+
+            MessageBox.Show("Game Reseted! Good luck!");
+        }
+
+        //ABOUT BUTTON
+        private void AboutGameStrip_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Made by Marco Silva.\nBeta Version 1.0.0");
+        }
+
+        //----------------- LABEL CLICK EVENTS -----------------
+        public void label_click_aces(object sender, EventArgs e)
+        {
             Label click_aces = sender as Label;
 
-            if(click_aces.Enabled) { click_aces.Enabled = false;  }
-            if(!click_aces.Enabled) { lbl_aces.BackColor = Color.Yellow; this.globalCount++; }            
+            if (click_aces.Enabled) { click_aces.Enabled = false; }
+            if (!click_aces.Enabled) { lbl_aces.BackColor = Color.Yellow; this.globalCount++; }
         }
+
         private void label_click_deuces(object sender, EventArgs e){
             Label click_deuces = sender as Label;
 
@@ -221,7 +284,7 @@ namespace Yahtzee
 
             if (click_hs.Enabled) { click_hs.Enabled = false; }
             if (!click_hs.Enabled) { click_hs.BackColor = Color.Yellow; this.globalCount++; }
-        }
+        }       
 
         private void label_click_chance(object sender, EventArgs e) {
             Label click_chance = sender as Label;
