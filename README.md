@@ -3,6 +3,8 @@ Yahtzee game in CSharp in Visual Studio Forms, a challenge to get familiared wit
 
 Also a way to make a game before trying to go for Unity Engine.
 
+![](https://github.com/MarcoDSilva/YahtzeeGame/blob/master/log_img.png "game preview")
+
 
 ## **BETA RELEASE**
 
